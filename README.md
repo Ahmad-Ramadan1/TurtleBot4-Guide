@@ -28,7 +28,7 @@ In our project, we are currently focusing on the development and integration of 
 
 # Installing ROS2
 
-1) Implementation of the UTF-8 Format
+## 1) Implementation of the UTF-8 Format
 ```bash
 sudo apt update && sudo apt install locales
 sudo locale-gen en_US en_US.UTF-8
@@ -38,7 +38,7 @@ export LANG=en_US.UTF-8
     
 We observe the installation with the "locale" command
 
-2) Source configuration
+## 2) Source configuration
 ```bash
 sudo apt install software-properties-common
 sudo add-apt-repository universe
@@ -47,79 +47,79 @@ sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee/etc/apt/sources.list.d/ros2.list /dev/null
 ```
 
-3) Installing ROS2 packages
+## 3) Installing ROS2 packages
     
-        I) Apt update
-        ```bash
-        sudo apt update
-        sudo apt upgrade
-        ```
-        II) Installing ROS2 packages 
-        To install ROS2, there are 2 choices:
-        a) the full version including graphics libraries, example codes, etc.;
-        b) the “lite” version with only what is needed to run ROS2
-                   
-        The second installation is often used for systems where resources are “limited” like a RaspberryPI for example.
-        Installing ROS2 packages:
-        ```bash
-        sudo apt install ros-humble-desktop
-        ```            
-        Installation of ROS2 Limited:
-        ```bash
-        sudo apt install ros-humble-ros-base
-        ```            
-        If you go to the official ROS2 Humble installation site, they present a "Development Tool" when installing ROS2. You have the option of installing it for your own reasons. In this document, we don't use it.
-        
-        III) ROS2 environment configuration
-        To use ROS2, it is necessary to "source" its installation folder in order to use ROS2 commands in terminals. We modify the "bashrc" script as follows.
-        ```bash
-        gedit ~/.bashrc
-        ```
-        A text editor window should open. At the end of this text file the following lines and save. The second line enables systems using ROS2 to communicate via WIFI on a network described by the ROS domain ID (default '0').
-        ```bash
-        source /opt/ros/humble/setup.bash
-        export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
-        export ROS_DOMAIN_ID=0
-        ```
-        To update the .bashrc file in your terminal, run the following command.
-        ```bash
-        source ~/.bashrc
-        ```
-        Note: You can also restart your terminal
-        
-        IV) ROS2 installation test
-        Test nodes are available to verify ROS2 installation. Run two different terminals and run the following commands.
-            
-        a) Terminal 1:
-        ```bash
-        ros2 run demo_nodes_cpp talker
-        ```    
-        b) Terminal 2:
-        ```bash
-        ros2 run demo_nodes_cpp listener
-        ```
-        You need to get similar results (the terminals talk to each other).
-        
-        V) Installing the colcon compiler
-        The colcon compiler can be used to build a ROS2 application.
-        Here are the commands to write in a terminal.
-        ```bash
-        sudo apt update
-        sudo apt install python3-colcon-common-extensions
-        ```
-        To make the compiler easier to use, we mouse over the compiler path in the .bashrc file as :
-        ```bash
-        gedit ~/.bashrc
-        ```
-        Then, in this file, below the ROS2 sourcing in the "ROS2 installation" section, we write the following line and save it. "ROS2 installation" section, we write the following line and save.
-         ```bash
-        source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
-        ```
-        To update the .bashrc file in your terminal, run the following command.
-        ```bash
-        source ~/.bashrc
-        ```
-        Note: You can also restart your terminal
+### I) Apt update
+```bash
+sudo apt update
+sudo apt upgrade
+```
+### II) Installing ROS2 packages 
+To install ROS2, there are 2 choices:
+a) the full version including graphics libraries, example codes, etc.;
+b) the “lite” version with only what is needed to run ROS2
+           
+The second installation is often used for systems where resources are “limited” like a RaspberryPI for example.
+Installing ROS2 packages:
+```bash
+sudo apt install ros-humble-desktop
+```            
+Installation of ROS2 Limited:
+```bash
+sudo apt install ros-humble-ros-base
+```            
+If you go to the official ROS2 Humble installation site, they present a "Development Tool" when installing ROS2. You have the option of installing it for your own reasons. In this document, we don't use it.
+
+### III) ROS2 environment configuration
+To use ROS2, it is necessary to "source" its installation folder in order to use ROS2 commands in terminals. We modify the "bashrc" script as follows.
+```bash
+gedit ~/.bashrc
+```
+A text editor window should open. At the end of this text file the following lines and save. The second line enables systems using ROS2 to communicate via WIFI on a network described by the ROS domain ID (default '0').
+```bash
+source /opt/ros/humble/setup.bash
+export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+export ROS_DOMAIN_ID=0
+```
+To update the .bashrc file in your terminal, run the following command.
+```bash
+source ~/.bashrc
+```
+Note: You can also restart your terminal
+
+### IV) ROS2 installation test
+Test nodes are available to verify ROS2 installation. Run two different terminals and run the following commands.
+    
+#### a) Terminal 1:
+```bash
+ros2 run demo_nodes_cpp talker
+```    
+#### b) Terminal 2:
+```bash
+ros2 run demo_nodes_cpp listener
+```
+You need to get similar results (the terminals talk to each other).
+
+### V) Installing the colcon compiler
+The colcon compiler can be used to build a ROS2 application.
+Here are the commands to write in a terminal.
+```bash
+sudo apt update
+sudo apt install python3-colcon-common-extensions
+```
+To make the compiler easier to use, we mouse over the compiler path in the .bashrc file as :
+```bash
+gedit ~/.bashrc
+```
+Then, in this file, below the ROS2 sourcing in the "ROS2 installation" section, we write the following line and save it. "ROS2 installation" section, we write the following line and save.
+ ```bash
+source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
+```
+To update the .bashrc file in your terminal, run the following command.
+```bash
+source ~/.bashrc
+```
+Note: You can also restart your terminal
 
 
 # Turtlebot4 installation and configuration:
