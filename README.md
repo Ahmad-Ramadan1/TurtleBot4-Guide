@@ -143,7 +143,7 @@ ros-humble-turtlebot4-node
 ## 3) Turtlebot4 configuration
 To configure turtlebot4 correctly, it's important to keep the system up to date with the latest patches. To do this, we first update the turtlebot's components, and then configure their parameters.
 
-### a) RaspberryPi firmware update 
+### I) RaspberryPi firmware update 
 To update the RaspberryPI, you need to extract the micro SD card from the RaspberryPI card. 
 We now use a micro SD to SD adapter and insert the card into our into the SD drive of our computer running Linux Ubuntu 22.04. 
 We open the 'disques' or 'disks' utility and select the SD card. We format overwriting existing data with zeros and without partitioning. 
@@ -157,12 +157,12 @@ To find the name of the SD card, go to the 'disque' or 'disks' utility select th
 When the terminal asks for the SD card name, we enter 'mmcblk0' and continue. 
 We put the SD card back into turtlebot4 and reassemble the robot.
             
-### b) CREATE3 card update 
+### II) CREATE3 card update 
 Switch on the turtlebot4 by positioning it on its charging base connected to the mains and wait for the robot to play a sound. \\
 On the supervision computer, download the latest version of Create3 (here Humble H2.6). Then connect to the turtlebot4's wifi network (SSID: 'Turtlebot4' | Mdp: 'Turtlebot4'). \\
 Go to a web browser and enter in the address bar the ip '10.42.0.1:8080'. In the 'Update' tab, follow the update instructions.
 
-### c) RaspberryPi configuration 
+### III) RaspberryPi configuration 
 Switch on turtlebot4 by positioning it on its charging base connected to the mains and wait for the robot to broadcast a sound. \\
 On the supervision computer, connect to the turtlebot4's wifi network (SSID: 'Turtlebot4' | Mdp: 'Turtlebot4'). Go to the remote access session of the turtlebot4 by typing the following command in a terminal:
 ```bash
@@ -185,7 +185,7 @@ https://turtlebot.github.io/turtlebot4-user-manual/setup/basic.html .
 If you wish to modify the \texttt{ROS\_DOMAIN\_ID} variable, go to the \texttt{ROS-SETUP} menu, then \texttt{BASH-SETUP}.
 Save and apply the changes.
 
-### d) Create3 card configuration 
+### IV) Create3 card configuration 
 Go to the turtlebot4 online space with a browser and the following ip: robot ip':8080 and connect the create3 card to your wifi network using the 'connect' tab.
 
 
@@ -203,16 +203,16 @@ So we configure the routes and servers to be reached to update the time and date
 We recommend setting the NTP relay to a fixed IPv4 address. In our case, we manually set these parameters on the ENDORSE PC connected to the network as follows: 
 IP:192.168.1.32 | Subnet mask: 255.255.255.0 | Default gateway:192.168.1.1 
 
-### a) NTP relay configuration under Linux Ubuntu 22.04
-#### i) Time zone change 
+### I) NTP relay configuration under Linux Ubuntu 22.04
+#### a) Time zone change 
 ```bash
 sudo timedatectl set-timezone UTC
 ```
-#### ii) Installation of 'ntp' configuration software 
+#### b) Installation of 'ntp' configuration software 
 ```bash
 sudo apt update && sudo apt install ntp
 ```
-#### iii) Configuring the ntp.conf file 
+#### c) Configuring the ntp.conf file 
 ```bash
 sudo nano /etc/ntp.conf
 ```
@@ -220,20 +220,20 @@ We save the file and restart the service.
 ```bash
 sudo systemctl restart ntp
 ```
-### b) Customer configuration 
-#### i) Time zone change
+### II) Customer configuration 
+#### a) Time zone change
 ```bash
 sudo timedatectl set-timezone UTC
 ```
-#### ii) Disabling the current ntp manager
+#### b) Disabling the current ntp manager
 ```bash
 sudo timedatectl set-ntp off
 ```
-#### iii) Installation of 'ntp' and 'ntpdate' configuration and synchronization software
+#### c) Installation of 'ntp' and 'ntpdate' configuration and synchronization software
 ```bash
 sudo apt update && sudo apt install ntp && sudo apt install ntpdate
 ```
-#### iv) Configuring the ntp.conf file
+#### d) Configuring the ntp.conf file
 ```bash
 sudo nano /etc/ntp.conf
 ```
@@ -242,14 +242,14 @@ Here we use the following IP '192.168.1.7:8080'.
 
 We enter the 'Edit ntp.conf' menu and enter the following lines (commenting on the default servers).
 
-### c) Restart the ntp service
-#### i) On linux:
+### III) Restart the ntp service
+#### a) On linux:
 ```bash
 sudo timedatectl set-timezone UTC
 ```
-#### ii) On Create3: 
+#### b) On Create3: 
 
-### d) Possible error 
+### IV) Possible error 
 If the RaspberryPI does not synchronize automatically when the robot is restarted, run the following command to do so manually.
 ```bash
 sudo timedatectl set-timezone UTC && sudo ntpdate [ip_du_relai]
