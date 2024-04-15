@@ -181,7 +181,7 @@ On the supervision computer, download the latest version of Create3 (here Humble
 Go to a web browser and enter in the address bar the ip '10.42.0.1:8080'. In the 'Update' tab, follow the update instructions.
 
 <p align="center">
-  <img src="https://github.com/Ahmad-Ramadan1/TurtleBot4-Guide/assets/167071993/8ad36fb8-f68d-482a-9acd-9e51272096cf" alt="Update Robot" width="50%">
+  <img src="https://github.com/Ahmad-Ramadan1/TurtleBot4-Guide/assets/167071993/8ad36fb8-f68d-482a-9acd-9e51272096cf" alt="Update Robot" width="75%">
 </p>
 
 ### III) RaspberryPi configuration 
@@ -211,7 +211,7 @@ Save and apply the changes.
 Go to the turtlebot4 online space with a browser and the following ip: robot ip':8080 and connect the create3 card to your wifi network using the 'connect' tab.
 
 <p align="center">
-  <img src="https://github.com/Ahmad-Ramadan1/TurtleBot4-Guide/assets/167071993/4c5bc3e5-beb4-44e8-bbfc-d2ac5ed01225" alt="Connect Robot to WIFI" width="50%">
+  <img src="https://github.com/Ahmad-Ramadan1/TurtleBot4-Guide/assets/167071993/4c5bc3e5-beb4-44e8-bbfc-d2ac5ed01225" alt="Connect Robot to WIFI" width="75%">
 </p>
 
 Click 'connect' and the robot restarts. 
@@ -219,7 +219,7 @@ Click 'connect' and the robot restarts.
 In the 'Application' tab, then 'Configuration', you can modify the ROS2 parameters (ensure that these parameters are identical to those on the RaspberryPi board). 
 
 <p align="center">
-  <img src="https://github.com/Ahmad-Ramadan1/TurtleBot4-Guide/assets/167071993/8af39f6b-46d1-4d0f-809c-9bfa131b4ff7" alt="App Configuration" width="50%">
+  <img src="https://github.com/Ahmad-Ramadan1/TurtleBot4-Guide/assets/167071993/8af39f6b-46d1-4d0f-809c-9bfa131b4ff7" alt="App Configuration" width="75%">
 </p>
 
 Restart the robot (to switch it off, remove it from the base and press and hold the stop button).
@@ -269,13 +269,13 @@ For the Create3 client, we go to the Web interface as \texttt{{[}IP\_of\_robot{]
 Here we use the following IP '192.168.1.7:8080'.
 
 <p align="center">
-  <img src="https://github.com/Ahmad-Ramadan1/TurtleBot4-Guide/assets/167071993/ab2503f0-78ac-455c-8a96-eebc0639c086" alt="Create3 Web Page" width="50%">
+  <img src="https://github.com/Ahmad-Ramadan1/TurtleBot4-Guide/assets/167071993/ab2503f0-78ac-455c-8a96-eebc0639c086" alt="Create3 Web Page" width="75%">
 </p>
 
 We enter the 'Edit ntp.conf' menu and enter the following lines (commenting on the default servers).
 
 <p align="center">
-  <img src="https://github.com/Ahmad-Ramadan1/TurtleBot4-Guide/assets/167071993/86ab17cb-89f9-4f09-8ef6-92e9810dd886" alt="NTP Configuration" width="50%">
+  <img src="https://github.com/Ahmad-Ramadan1/TurtleBot4-Guide/assets/167071993/86ab17cb-89f9-4f09-8ef6-92e9810dd886" alt="NTP Configuration" width="75%">
 </p>
 
 ### III) Restart the ntp service
@@ -286,7 +286,7 @@ sudo timedatectl set-timezone UTC
 #### b) On Create3: 
 
 <p align="center">
-  <img src="https://github.com/Ahmad-Ramadan1/TurtleBot4-Guide/assets/167071993/64ee08a8-e9e1-45cc-a2fb-421624c6ec43" alt="Restart NTP Create3" width="50%">
+  <img src="https://github.com/Ahmad-Ramadan1/TurtleBot4-Guide/assets/167071993/64ee08a8-e9e1-45cc-a2fb-421624c6ec43" alt="Restart NTP Create3" width="75%">
 </p>
 
 ### IV) Possible error 
