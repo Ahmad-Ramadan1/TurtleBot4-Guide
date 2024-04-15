@@ -25,12 +25,16 @@ The RPLIDAR A1M8 is a 360-degree Laser Range Scanner with a 12m range. It is use
 The OAK-D-Lite camera from Luxonis uses a 4K IMX214 colour sensor along with a pair of OV7251 stereo sensors to produce high quality colour and depth images. 
 The on-board Myriad X VPU gives the camera the power to run computer vision applications, object tracking, and run AI models.
 
-![oak-d-pro](https://github.com/Ahmad-Ramadan1/TurtleBot4-Guide/assets/167071993/413282cc-3cc4-4d7d-bfe0-15b43e1a50fe)
+<p align="center">
+  <img src="https://github.com/Ahmad-Ramadan1/TurtleBot4-Guide/assets/167071993/413282cc-3cc4-4d7d-bfe0-15b43e1a50fe" alt="oak-d-pro" width="50%">
+</p>
 
 ## 3) OAK-D-Lite
 The OAK-D-Pro offers all of the same features the OAK-D-Lite has, but uses higher resolution OV9282 stereo sensors and adds an IR laser dot projector and an IR illumination LED. This allows the camera to create higher quality depth images, and perform better in low-light environments.
 
-![oak-d-lite](https://github.com/Ahmad-Ramadan1/TurtleBot4-Guide/assets/167071993/da89fd93-5d17-437e-be18-26311370fe75)
+<p align="center">
+  <img src="https://github.com/Ahmad-Ramadan1/TurtleBot4-Guide/assets/167071993/da89fd93-5d17-437e-be18-26311370fe75" alt="oak-d-lite" width="50%">
+</p>
 
 In our project, we are currently focusing on the development and integration of the TurtleBot 4. Below, you can find a table highlighting the key differences between the TurtleBot 4 and the TurtleBot 4 Lite. This comparison will help provide insight into the unique features and specifications of each model, aiding in decision-making and understanding their respective capabilities within our project.
 
@@ -176,7 +180,9 @@ Switch on the turtlebot4 by positioning it on its charging base connected to the
 On the supervision computer, download the latest version of Create3 (here Humble H2.6). Then connect to the turtlebot4's wifi network (SSID: 'Turtlebot4' | Mdp: 'Turtlebot4'). \\
 Go to a web browser and enter in the address bar the ip '10.42.0.1:8080'. In the 'Update' tab, follow the update instructions.
 
-![Update Robot](https://github.com/Ahmad-Ramadan1/TurtleBot4-Guide/assets/167071993/8ad36fb8-f68d-482a-9acd-9e51272096cf)
+<p align="center">
+  <img src="https://github.com/Ahmad-Ramadan1/TurtleBot4-Guide/assets/167071993/8ad36fb8-f68d-482a-9acd-9e51272096cf" alt="Update Robot" width="50%">
+</p>
 
 ### III) RaspberryPi configuration 
 Switch on turtlebot4 by positioning it on its charging base connected to the mains and wait for the robot to broadcast a sound. \\
@@ -204,13 +210,17 @@ Save and apply the changes.
 ### IV) Create3 card configuration 
 Go to the turtlebot4 online space with a browser and the following ip: robot ip':8080 and connect the create3 card to your wifi network using the 'connect' tab.
 
-![Connect Robot to WIFI](https://github.com/Ahmad-Ramadan1/TurtleBot4-Guide/assets/167071993/4c5bc3e5-beb4-44e8-bbfc-d2ac5ed01225)
+<p align="center">
+  <img src="https://github.com/Ahmad-Ramadan1/TurtleBot4-Guide/assets/167071993/4c5bc3e5-beb4-44e8-bbfc-d2ac5ed01225" alt="Connect Robot to WIFI" width="50%">
+</p>
 
 Click 'connect' and the robot restarts. 
 
 In the 'Application' tab, then 'Configuration', you can modify the ROS2 parameters (ensure that these parameters are identical to those on the RaspberryPi board). 
 
-![App Config](https://github.com/Ahmad-Ramadan1/TurtleBot4-Guide/assets/167071993/8af39f6b-46d1-4d0f-809c-9bfa131b4ff7)
+<p align="center">
+  <img src="https://github.com/Ahmad-Ramadan1/TurtleBot4-Guide/assets/167071993/8af39f6b-46d1-4d0f-809c-9bfa131b4ff7" alt="App Configuration" width="50%">
+</p>
 
 Restart the robot (to switch it off, remove it from the base and press and hold the stop button).
 
@@ -258,11 +268,15 @@ sudo nano /etc/ntp.conf
 For the Create3 client, we go to the Web interface as \texttt{{[}IP\_of\_robot{]}:8080}. \\
 Here we use the following IP '192.168.1.7:8080'.
 
-![Create3 Web page](https://github.com/Ahmad-Ramadan1/TurtleBot4-Guide/assets/167071993/ab2503f0-78ac-455c-8a96-eebc0639c086)
+<p align="center">
+  <img src="https://github.com/Ahmad-Ramadan1/TurtleBot4-Guide/assets/167071993/ab2503f0-78ac-455c-8a96-eebc0639c086" alt="Create3 Web Page" width="50%">
+</p>
 
 We enter the 'Edit ntp.conf' menu and enter the following lines (commenting on the default servers).
 
-![NTP Config](https://github.com/Ahmad-Ramadan1/TurtleBot4-Guide/assets/167071993/86ab17cb-89f9-4f09-8ef6-92e9810dd886)
+<p align="center">
+  <img src="https://github.com/Ahmad-Ramadan1/TurtleBot4-Guide/assets/167071993/86ab17cb-89f9-4f09-8ef6-92e9810dd886" alt="NTP Configuration" width="50%">
+</p>
 
 ### III) Restart the ntp service
 #### a) On linux:
@@ -271,7 +285,9 @@ sudo timedatectl set-timezone UTC
 ```
 #### b) On Create3: 
 
-![Restart NTP Create3](https://github.com/Ahmad-Ramadan1/TurtleBot4-Guide/assets/167071993/64ee08a8-e9e1-45cc-a2fb-421624c6ec43)
+<p align="center">
+  <img src="https://github.com/Ahmad-Ramadan1/TurtleBot4-Guide/assets/167071993/64ee08a8-e9e1-45cc-a2fb-421624c6ec43" alt="Restart NTP Create3" width="50%">
+</p>
 
 ### IV) Possible error 
 If the RaspberryPI does not synchronize automatically when the robot is restarted, run the following command to do so manually.
