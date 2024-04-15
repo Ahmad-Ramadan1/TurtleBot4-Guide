@@ -286,7 +286,7 @@ sudo timedatectl set-timezone UTC
 #### b) On Create3: 
 
 <p align="center">
-  <img src="https://github.com/Ahmad-Ramadan1/TurtleBot4-Guide/assets/167071993/64ee08a8-e9e1-45cc-a2fb-421624c6ec43" alt="Restart NTP Create3" width="100%">
+  <img src="https://github.com/Ahmad-Ramadan1/TurtleBot4-Guide/assets/167071993/64ee08a8-e9e1-45cc-a2fb-421624c6ec43" alt="Restart NTP Create3" width="80%">
 </p>
 
 ### IV) Possible error 
