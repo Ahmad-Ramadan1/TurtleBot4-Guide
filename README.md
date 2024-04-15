@@ -2,15 +2,15 @@
 
 # Background:
 
-ROS 2 stands for "Robot Operating System 2". It's an open-source framework for writing robot software. It's designed to be a flexible platform for developing robotics applications. ROS 2 is a successor to ROS, aiming to address limitations and improve upon its predecessor's functionalities. It offers improved real-time capabilities, better support for various hardware platforms, and enhanced security features, among other advancements. 
-ROS 2 relies on the notion of combining workspaces using the shell environment. “Workspace” is a ROS term for the location on your system where you’re developing with ROS 2. The core ROS 2 workspace is called the underlay. Subsequent local workspaces are called overlays. When developing with ROS 2, you will typically have several workspaces active concurrently. 
+ROS 2 stands for "Robot Operating System 2". It's an open-source framework for writing robot software. It's designed to be a flexible platform for developing robotics applications. ROS 2 is a successor to ROS, aiming to address limitations and improve upon its predecessor's functionalities. It offers improved real-time capabilities, better support for various hardware platforms, and enhanced security features, among other advancements.  
+ROS 2 relies on the notion of combining workspaces using the shell environment. “Workspace” is a ROS term for the location on your system where you’re developing with ROS 2. The core ROS 2 workspace is called the underlay. Subsequent local workspaces are called overlays. When developing with ROS 2, you will typically have several workspaces active concurrently.   
 Combining workspaces makes developing against different versions of ROS 2, or against different sets of packages, easier. It also allows the installation of several ROS 2 distributions (distros) on the same computer and switching between them. 
 This is accomplished by sourcing setup files every time you open a new shell, or by adding the source command to your shell startup script once. Without sourcing the setup files, you won’t be able to access ROS 2 commands, or find or use ROS 2 packages. In other words, you won’t be able to use ROS 2.
 
 # TurtleBot4
-The TurtleBot 4 is a ROS 2-based mobile robot intended for education and research. The TurtleBot 4 is capable of mapping the robot's surroundings, navigating autonomously, running AI models on its camera, and more. 
-It uses a Create® 3 as the base platform, and builds on it with the TurtleBot 4 shell and User Interface (UI) board. Inside the shell sits a Raspberry Pi 4B which runs the TurtleBot 4 software. 
-The TurtleBot 4 Lite is a barebones version of the TurtleBot 4. It has just the necessary components for navigation, mapping, and AI applications. The TurtleBot 4 has the same Raspberry Pi 4B, which sits in the cargo bay of the Create® 3, as well as the same RPLIDAR A1M8. The camera on the TurtleBot 4 Lite is the OAK-D-Lite. Additional sensors and payloads can be attached to the Create® 3 faceplate, or placed inside the cargo bay.
+The TurtleBot 4 is a ROS 2-based mobile robot intended for education and research. The TurtleBot 4 is capable of mapping the robot's surroundings, navigating autonomously, running AI models on its camera, and more.   
+It uses a Create® 3 as the base platform, and builds on it with the TurtleBot 4 shell and User Interface (UI) board. Inside the shell sits a Raspberry Pi 4B which runs the TurtleBot 4 software.   
+The TurtleBot 4 Lite is a barebones version of the TurtleBot 4. It has just the necessary components for navigation, mapping, and AI applications. The TurtleBot 4 has the same Raspberry Pi 4B, which sits in the cargo bay of the Create® 3, as well as the same RPLIDAR A1M8. The camera on the TurtleBot 4 Lite is the OAK-D-Lite. Additional sensors and payloads can be attached to the Create® 3 faceplate, or placed inside the cargo bay.  
 
 # Sensors
 
