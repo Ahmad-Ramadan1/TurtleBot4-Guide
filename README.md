@@ -203,17 +203,16 @@ We save the file and restart the service.
 >sudo systemctl restart ntp
 
 ###### Customer configuration 
-####### Time zone change 
+- Time zone change 
 >sudo timedatectl set-timezone UTC
 
-
-####### Disabling the current ntp manager 
+- Disabling the current ntp manager 
 >sudo timedatectl set-ntp off
 
-####### Installation of 'ntp' and 'ntpdate' configuration and synchronization software 
+- Installation of 'ntp' and 'ntpdate' configuration and synchronization software 
 >sudo apt update && sudo apt install ntp && sudo apt install ntpdate
 
-####### Configuring the ntp.conf file 
+- Configuring the ntp.conf file 
 >sudo nano /etc/ntp.conf
 
 For the Create3 client, we go to the Web interface as \texttt{{[}IP\_of\_robot{]}:8080}. \\
@@ -221,33 +220,15 @@ Here we use the following IP '192.168.1.7:8080'.
 
 We enter the 'Edit ntp.conf' menu and enter the following lines (commenting on the default servers).
 
+- Restart the ntp service
+  * On linux: 
+    >sudo timedatectl set-timezone UTC
+    
+  * On Create3: 
 
-\begin{itemize}
-\item Restart the ntp service
-\begin{itemize}
-\item On linux: 
-\begin{verbatim}
->sudo timedatectl set-timezone UTC
-\end{verbatim} 
-\item On Create3: 
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.65\textwidth]{Images/Restart NTP Create3.jpg}
-\caption{Restart NTP Create3}
-\label{fig: Restart NTP Create3}
-\end{figure}
-\end{itemize}
-
-\newpage
-
-\item Possible error \\
+- Possible error 
 If the RaspberryPI does not synchronize automatically when the robot is restarted, run the following command to do so manually.
-\begin{verbatim}
 >sudo timedatectl set-timezone UTC && sudo ntpdate [ip_du_relai]
-\end{verbatim}
+
 and enter this command in ~/.bashrc.
 
-\end{itemize}
-\end{itemize}
-\end{itemize}
