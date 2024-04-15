@@ -1,5 +1,4 @@
-# TurtleBot4-Guide
-Implementation of TurtleBot with ROS2: Development and Integration
+# Implementation of TurtleBot with ROS2: Development and Integration
 
 # Background:
 
@@ -15,21 +14,21 @@ The TurtleBot 4 Lite is a barebones version of the TurtleBot 4. It has just the 
 
 # Sensors
 
-## RPLIDAR A1M8
+1) RPLIDAR A1M8
 The RPLIDAR A1M8 is a 360 degree Laser Range Scanner with a 12m range. It is used to generate a 2D scan of the robot's surroundings.
         
-## OAK-D-Pro
+2)  OAK-D-Pro
 The OAK-D-Lite camera from Luxonis uses a 4K IMX214 colour sensor along with a pair of OV7251 stereo sensors to produce high quality colour and depth images. 
 The on-board Myriad X VPU gives the camera the power to run computer vision applications, object tracking, and run AI models.
         
-## OAK-D-Lite
+3) OAK-D-Lite
 The OAK-D-Pro offers all of the same features the OAK-D-Lite has, but uses higher resolution OV9282 stereo sensors and adds an IR laser dot projector and an IR illumination LED. This allows the camera to create higher quality depth images, and perform better in low-light environments.
 
 In our project, we are currently focusing on the development and integration of the TurtleBot 4. Below, you can find a table highlighting the key differences between the TurtleBot 4 and the TurtleBot 4 Lite. This comparison will help provide insight into the unique features and specifications of each model, aiding in decision-making and understanding their respective capabilities within our project.
 
 # Installing ROS2
 
-## Implementation of the UTF-8 Format
+1) Implementation of the UTF-8 Format
 ```bash
 sudo apt update && sudo apt install locales
 sudo locale-gen en_US en_US.UTF-8
@@ -39,7 +38,7 @@ export LANG=en_US.UTF-8
     
 We observe the installation with the "locale" command
 
-## Source configuration
+2) Source configuration
 ```bash
 sudo apt install software-properties-common
 sudo add-apt-repository universe
@@ -48,17 +47,17 @@ sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee/etc/apt/sources.list.d/ros2.list /dev/null
 ```
 
-## Installing ROS2 packages
+3) Installing ROS2 packages
     
-### Apt update
+## Apt update
 ```bash
 sudo apt update
 sudo apt upgrade
 ```
-### Installing ROS2 packages 
+## Installing ROS2 packages 
 To install ROS2, there are 2 choices:
-1) the full version including graphics libraries, example codes, etc.;
-2) the “lite” version with only what is needed to run ROS2
+a) the full version including graphics libraries, example codes, etc.;
+b) the “lite” version with only what is needed to run ROS2
            
 The second installation is often used for systems where resources are “limited” like a RaspberryPI for example.
 Installing ROS2 packages:
@@ -71,7 +70,7 @@ sudo apt install ros-humble-ros-base
 ```            
 If you go to the official ROS2 Humble installation site, they present a "Development Tool" when installing ROS2. You have the option of installing it for your own reasons. In this document, we don't use it.
 
-### ROS2 environment configuration
+## ROS2 environment configuration
 To use ROS2, it is necessary to "source" its installation folder in order to use ROS2 commands in terminals. We modify the "bashrc" script as follows.
 ```bash
 gedit ~/.bashrc
@@ -88,20 +87,20 @@ source ~/.bashrc
 ```
 Note: You can also restart your terminal
 
-### ROS2 installation test
+## ROS2 installation test
 Test nodes are available to verify ROS2 installation. Run two different terminals and run the following commands.
     
-#### Terminal 1:
+a) Terminal 1:
 ```bash
 ros2 run demo_nodes_cpp talker
 ```    
-#### Terminal 2:
+b) Terminal 2:
 ```bash
 ros2 run demo_nodes_cpp listener
 ```
 You need to get similar results (the terminals talk to each other).
 
-### Installing the colcon compiler
+## Installing the colcon compiler
 The colcon compiler can be used to build a ROS2 application.
 Here are the commands to write in a terminal.
 ```bash
@@ -123,16 +122,16 @@ source ~/.bashrc
 Note: You can also restart your terminal
 
 
-#### Turtlebot4 installation and configuration:
+# Turtlebot4 installation and configuration:
 
-##### Preparing the WIFI network
+1) Preparing the WIFI network
 Firstly, it is important to configure a network to support at least two wifi bands (2.4GHz and 5GHz). The minimum hardware needed to monitor a turtlebot4 is:
 A WIFI terminal (or cell phone access point) connected to the Internet
 A computer running Linux Ubuntu 22.04 with ROS2 for supervision purposes       
 Turtlebot4
 In the case of a network not connected to the Internet, you'll need another computer, preferably running Linux Ubuntu 22.04. The purpose of this computer is to synchronize all equipment connected to the network by broadcasting the date and time using the NTP time protocol.
 
-##### ROS2 package installation for turtlebot4
+2) ROS2 package installation for turtlebot4
 On the supervision computer, open a terminal and enter the following commands:
 ```bash
 sudo apt update && sudo apt install ros-humble-turtlebot4-desktop
@@ -141,10 +140,10 @@ ros-humble-turtlebot4-msgs
 ros-humble-turtlebot4-navigation 
 ros-humble-turtlebot4-node
 ```
-##### Turtlebot4 configuration
+3) Turtlebot4 configuration
 To configure turtlebot4 correctly, it's important to keep the system up to date with the latest patches. To do this, we first update the turtlebot's components, and then configure their parameters.
 
-###### RaspberryPi firmware update 
+a) RaspberryPi firmware update 
 To update the RaspberryPI, you need to extract the micro SD card from the RaspberryPI card. 
 We now use a micro SD to SD adapter and insert the card into our into the SD drive of our computer running Linux Ubuntu 22.04. 
 We open the 'disques' or 'disks' utility and select the SD card. We format overwriting existing data with zeros and without partitioning. 
@@ -158,12 +157,12 @@ To find the name of the SD card, go to the 'disque' or 'disks' utility select th
 When the terminal asks for the SD card name, we enter 'mmcblk0' and continue. 
 We put the SD card back into turtlebot4 and reassemble the robot.
             
-###### item CREATE3 card update 
+b) CREATE3 card update 
 Switch on the turtlebot4 by positioning it on its charging base connected to the mains and wait for the robot to play a sound. \\
 On the supervision computer, download the latest version of Create3 (here Humble H2.6). Then connect to the turtlebot4's wifi network (SSID: 'Turtlebot4' | Mdp: 'Turtlebot4'). \\
 Go to a web browser and enter in the address bar the ip '10.42.0.1:8080'. In the 'Update' tab, follow the update instructions.
 
-###### RaspberryPi configuration 
+c) RaspberryPi configuration 
 Switch on turtlebot4 by positioning it on its charging base connected to the mains and wait for the robot to broadcast a sound. \\
 On the supervision computer, connect to the turtlebot4's wifi network (SSID: 'Turtlebot4' | Mdp: 'Turtlebot4'). Go to the remote access session of the turtlebot4 by typing the following command in a terminal:
 ```bash
@@ -186,7 +185,7 @@ https://turtlebot.github.io/turtlebot4-user-manual/setup/basic.html .
 If you wish to modify the \texttt{ROS\_DOMAIN\_ID} variable, go to the \texttt{ROS-SETUP} menu, then \texttt{BASH-SETUP}.
 Save and apply the changes.
 
-###### Create3 card configuration 
+d) Create3 card configuration 
 Go to the turtlebot4 online space with a browser and the following ip: robot ip':8080 and connect the create3 card to your wifi network using the 'connect' tab.
 
 
@@ -197,61 +196,60 @@ In the 'Application' tab, then 'Configuration', you can modify the ROS2 paramete
 
 Restart the robot (to switch it off, remove it from the base and press and hold the stop button).
 
-#### NTP protocol configuration (clock synchronization)
+4) NTP protocol configuration (clock synchronization)
 For the proper operation of the network and the systems installed on it, it's important to synchronize everything to the same time and date. In fact, some community-programmed ROS2 nodes use time-stamped data for their operation their operation. 
 So we configure the routes and servers to be reached to update the time and date of every date of each device on the wifi network. 
 
 We recommend setting the NTP relay to a fixed IPv4 address. In our case, we manually set these parameters on the ENDORSE PC connected to the network as follows: 
 IP:192.168.1.32 | Subnet mask: 255.255.255.0 | Default gateway:192.168.1.1 
 
-##### NTP relay configuration under Linux Ubuntu 22.04
-###### Time zone change 
-```bash
-sudo timedatectl set-timezone UTC
-```
-
-###### Installation of 'ntp' configuration software 
-```bash
-sudo apt update && sudo apt install ntp
-```
-###### Configuring the ntp.conf file 
-```bash
-sudo nano /etc/ntp.conf
-```
-We save the file and restart the service.
-```bash
-sudo systemctl restart ntp
-```
-###### Customer configuration 
-- Time zone change
-```bash
-sudo timedatectl set-timezone UTC
-```
-- Disabling the current ntp manager
-```bash
-sudo timedatectl set-ntp off
-```
-- Installation of 'ntp' and 'ntpdate' configuration and synchronization software
-```bash
-sudo apt update && sudo apt install ntp && sudo apt install ntpdate
-```
-- Configuring the ntp.conf file
-```bash
-sudo nano /etc/ntp.conf
-```
+a) NTP relay configuration under Linux Ubuntu 22.04
+        i) Time zone change 
+        ```bash
+        sudo timedatectl set-timezone UTC
+        ```
+        ii) Installation of 'ntp' configuration software 
+        ```bash
+        sudo apt update && sudo apt install ntp
+        ```
+        iii) Configuring the ntp.conf file 
+        ```bash
+        sudo nano /etc/ntp.conf
+        ```
+        We save the file and restart the service.
+        ```bash
+        sudo systemctl restart ntp
+        ```
+b) Customer configuration 
+        i) Time zone change
+        ```bash
+        sudo timedatectl set-timezone UTC
+        ```
+        ii) Disabling the current ntp manager
+        ```bash
+        sudo timedatectl set-ntp off
+        ```
+        iii) Installation of 'ntp' and 'ntpdate' configuration and synchronization software
+        ```bash
+        sudo apt update && sudo apt install ntp && sudo apt install ntpdate
+        ```
+        iv) Configuring the ntp.conf file
+        ```bash
+        sudo nano /etc/ntp.conf
+        ```
 For the Create3 client, we go to the Web interface as \texttt{{[}IP\_of\_robot{]}:8080}. \\
 Here we use the following IP '192.168.1.7:8080'.
 
 We enter the 'Edit ntp.conf' menu and enter the following lines (commenting on the default servers).
 
-- Restart the ntp service
-  * On linux:
+c) Restart the ntp service
+  i) On linux:
     ```bash
     sudo timedatectl set-timezone UTC
     ```
-  * On Create3: 
+  ii) On Create3: 
 
-- Possible error 
+d) Possible error 
 If the RaspberryPI does not synchronize automatically when the robot is restarted, run the following command to do so manually.
 ```bash
 sudo timedatectl set-timezone UTC && sudo ntpdate [ip_du_relai]
