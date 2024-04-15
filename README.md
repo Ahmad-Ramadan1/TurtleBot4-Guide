@@ -1,8 +1,9 @@
 # TurtleBot4-Guide
 ```latex ... ```
-\section{Implementation of TurtleBot with ROS2: Development and Integration}
+Implementation of TurtleBot with ROS2: Development and Integration
 
-\subsection{Background}
+Background:
+
 ROS 2 stands for "Robot Operating System 2". It's an open-source framework for writing robot software. It's designed to be a flexible platform for developing robotics applications. ROS 2 is a successor to ROS, aiming to address limitations and improve upon its predecessor's functionalities. It offers improved real-time capabilities, better support for various hardware platforms, and enhanced security features, among other advancements. \\
 ROS 2 relies on the notion of combining workspaces using the shell environment. “Workspace” is a ROS term for the location on your system where you’re developing with ROS 2. The core ROS 2 workspace is called the underlay. Subsequent local workspaces are called overlays. When developing with ROS 2, you will typically have several workspaces active concurrently. \\
 Combining workspaces makes developing against different versions of ROS 2, or against different sets of packages, easier. It also allows the installation of several ROS 2 distributions (distros) on the same computer and switching between them. \\
