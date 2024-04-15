@@ -1,58 +1,55 @@
 # TurtleBot4-Guide
 Implementation of TurtleBot with ROS2: Development and Integration
 
-Background:
+# Background:
 
 ROS 2 stands for "Robot Operating System 2". It's an open-source framework for writing robot software. It's designed to be a flexible platform for developing robotics applications. ROS 2 is a successor to ROS, aiming to address limitations and improve upon its predecessor's functionalities. It offers improved real-time capabilities, better support for various hardware platforms, and enhanced security features, among other advancements. 
 ROS 2 relies on the notion of combining workspaces using the shell environment. “Workspace” is a ROS term for the location on your system where you’re developing with ROS 2. The core ROS 2 workspace is called the underlay. Subsequent local workspaces are called overlays. When developing with ROS 2, you will typically have several workspaces active concurrently. 
 Combining workspaces makes developing against different versions of ROS 2, or against different sets of packages, easier. It also allows the installation of several ROS 2 distributions (distros) on the same computer and switching between them. 
 This is accomplished by sourcing setup files every time you open a new shell, or by adding the source command to your shell startup script once. Without sourcing the setup files, you won’t be able to access ROS 2 commands, or find or use ROS 2 packages. In other words, you won’t be able to use ROS 2.
 
-TurtleBot4
+# TurtleBot4
 The TurtleBot 4 is a ROS 2-based mobile robot intended for education and research. The TurtleBot 4 is capable of mapping the robot's surroundings, navigating autonomously, running AI models on its camera, and more. 
 It uses a Create® 3 as the base platform, and builds on it with the TurtleBot 4 shell and User Interface (UI) board. Inside the shell sits a Raspberry Pi 4B which runs the TurtleBot 4 software. 
 The TurtleBot 4 Lite is a barebones version of the TurtleBot 4. It has just the necessary components for navigation, mapping, and AI applications. The TurtleBot 4 has the same Raspberry Pi 4B, which sits in the cargo bay of the Create® 3, as well as the same RPLIDAR A1M8. The camera on the TurtleBot 4 Lite is the OAK-D-Lite. Additional sensors and payloads can be attached to the Create® 3 faceplate, or placed inside the cargo bay.
 
-Sensors
+# Sensors
 
-RPLIDAR A1M8
+1) RPLIDAR A1M8
 The RPLIDAR A1M8 is a 360 degree Laser Range Scanner with a 12m range. It is used to generate a 2D scan of the robot's surroundings.
         
-
-
-OAK-D-Pro
+2) OAK-D-Pro
 The OAK-D-Lite camera from Luxonis uses a 4K IMX214 colour sensor along with a pair of OV7251 stereo sensors to produce high quality colour and depth images. 
 The on-board Myriad X VPU gives the camera the power to run computer vision applications, object tracking, and run AI models.
         
-
-OAK-D-Lite
+3) OAK-D-Lite
 The OAK-D-Pro offers all of the same features the OAK-D-Lite has, but uses higher resolution OV9282 stereo sensors and adds an IR laser dot projector and an IR illumination LED. This allows the camera to create higher quality depth images, and perform better in low-light environments.
 
 In our project, we are currently focusing on the development and integration of the TurtleBot 4. Below, you can find a table highlighting the key differences between the TurtleBot 4 and the TurtleBot 4 Lite. This comparison will help provide insight into the unique features and specifications of each model, aiding in decision-making and understanding their respective capabilities within our project.
 
-Installing ROS2
-    > sudo apt update && sudo apt install locales
-    > sudo locale-gen en_US en_US.UTF-8
-    > sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
-    > export LANG=en_US.UTF-8
+# Installing ROS2
+> sudo apt update && sudo apt install locales
+> sudo locale-gen en_US en_US.UTF-8
+> sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+> export LANG=en_US.UTF-8
     
 We observe the installation with the "locale" command
 
-Source configuration
-    > sudo apt install software-properties-common
-    > sudo add-apt-repository universe
-    > sudo apt update && sudo apt install curl -y
-    > sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
-    > echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+# Source configuration
+> sudo apt install software-properties-common
+> sudo add-apt-repository universe
+> sudo apt update && sudo apt install curl -y
+> sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+> echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
          
          
-Installing ROS2 packages
+# Installing ROS2 packages
     
-Apt update
+# Apt update
 > sudo apt update
 > sudo apt upgrade
 
-Installing ROS2 packages 
+# Installing ROS2 packages 
 To install ROS2, there are 2 choices:
 1) the full version including graphics libraries, example codes, etc.;
 2) the “lite” version with only what is needed to run ROS2
