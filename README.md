@@ -38,6 +38,7 @@ In our project, we are currently focusing on the development and integration of 
 We observe the installation with the "locale" command
 
 ## Source configuration
+```bash
 > sudo apt install software-properties-common
 > sudo add-apt-repository universe
 > sudo apt update && sudo apt install curl -y
