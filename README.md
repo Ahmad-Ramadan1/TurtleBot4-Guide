@@ -42,12 +42,8 @@ Source configuration
     > sudo apt install software-properties-common
     > sudo add-apt-repository universe
     > sudo apt update && sudo apt install curl -y
-    > sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key 
-    -o /usr/share/keyrings/ros-archive-keyring.gpg
-    > echo "deb [arch=$(dpkg --print-architecture) 
-    signed-by=/usr/share/keyrings/ros-archive-keyring.gpg]
-    http://packages.ros.org/ros2/ubuntu $(. /etc/os-release 
-    && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+    > sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+    > echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
          
          
 Installing ROS2 packages
@@ -68,11 +64,11 @@ Installing ROS2 packages:
 Installation of ROS2 Limited:
 > sudo apt install ros-humble-ros-base
             
-    If you go to the official ROS2 Humble installation site, they present a "Development Tool" when installing ROS2. You have the option of installing it for your own reasons. In this document, we don't use it.
+If you go to the official ROS2 Humble installation site, they present a "Development Tool" when installing ROS2. You have the option of installing it for your own reasons. In this document, we don't use it.
 
 ROS2 environment configuration
-  To use ROS2, it is necessary to "source" its installation folder in order to use ROS2 commands in terminals. We modify the "bashrc" script as follows.
-  > gedit ~/.bashrc
+To use ROS2, it is necessary to "source" its installation folder in order to use ROS2 commands in terminals. We modify the "bashrc" script as follows.
+> gedit ~/.bashrc
 
  A text editor window should open. At the end of this text file the following lines and save. The second line enables systems using ROS2 to communicate via WIFI on a network described by the ROS domain ID (default '0').
 
@@ -87,11 +83,11 @@ ROS2 environment configuration
 ROS2 installation test
 Test nodes are available to verify ROS2 installation. Run two different terminals and run the following commands.
     
-    Terminal 1:
-    > ros2 run demo_nodes_cpp talker
+Terminal 1:
+> ros2 run demo_nodes_cpp talker
     
-    Terminal 2:
-    > ros2 run demo_nodes_cpp listener
+Terminal 2:
+> ros2 run demo_nodes_cpp listener
 
  You need to get similar results (the terminals talk to each other).
 
