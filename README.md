@@ -37,9 +37,9 @@ export LANG=en_US.UTF-8
 ```
     
 We observe the installation with the "locale" command
-
+<p align="center">
 ![Locale Command](https://github.com/Ahmad-Ramadan1/TurtleBot4-Guide/assets/167071993/831b4b3b-3972-458e-ad2c-d4997a514096)
-
+</p>p>
 ## 2) Source configuration
 ```bash
 sudo apt install software-properties-common
