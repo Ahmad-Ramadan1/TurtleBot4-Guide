@@ -102,6 +102,8 @@ ros2 run demo_nodes_cpp listener
 ```
 You need to get similar results (the terminals talk to each other).
 
+![Talker-Listener](https://github.com/Ahmad-Ramadan1/TurtleBot4-Guide/assets/167071993/ed28d9e3-9861-4280-9b3d-0487fa58e127)
+
 ### V) Installing the colcon compiler
 The colcon compiler can be used to build a ROS2 application.
 Here are the commands to write in a terminal.
