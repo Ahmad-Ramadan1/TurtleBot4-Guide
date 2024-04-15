@@ -49,12 +49,12 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-a
 
 3) Installing ROS2 packages
     
-## Apt update
+I) Apt update
 ```bash
 sudo apt update
 sudo apt upgrade
 ```
-## Installing ROS2 packages 
+II) Installing ROS2 packages 
 To install ROS2, there are 2 choices:
 a) the full version including graphics libraries, example codes, etc.;
 b) the “lite” version with only what is needed to run ROS2
@@ -70,7 +70,7 @@ sudo apt install ros-humble-ros-base
 ```            
 If you go to the official ROS2 Humble installation site, they present a "Development Tool" when installing ROS2. You have the option of installing it for your own reasons. In this document, we don't use it.
 
-## ROS2 environment configuration
+III) ROS2 environment configuration
 To use ROS2, it is necessary to "source" its installation folder in order to use ROS2 commands in terminals. We modify the "bashrc" script as follows.
 ```bash
 gedit ~/.bashrc
@@ -87,7 +87,7 @@ source ~/.bashrc
 ```
 Note: You can also restart your terminal
 
-## ROS2 installation test
+IV) ROS2 installation test
 Test nodes are available to verify ROS2 installation. Run two different terminals and run the following commands.
     
 a) Terminal 1:
@@ -100,7 +100,7 @@ ros2 run demo_nodes_cpp listener
 ```
 You need to get similar results (the terminals talk to each other).
 
-## Installing the colcon compiler
+V) Installing the colcon compiler
 The colcon compiler can be used to build a ROS2 application.
 Here are the commands to write in a terminal.
 ```bash
