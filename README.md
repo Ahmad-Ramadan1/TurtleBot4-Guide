@@ -38,37 +38,138 @@ The OAK-D-Pro offers all of the same features the OAK-D-Lite has, but uses highe
 
 In our project, we are currently focusing on the development and integration of the TurtleBot 4. Below, you can find a table highlighting the key differences between the TurtleBot 4 and the TurtleBot 4 Lite. This comparison will help provide insight into the unique features and specifications of each model, aiding in decision-making and understanding their respective capabilities within our project.
 
-<p align="center">
-
-|                                   | **TurtleBot 4 Lite**          | **TurtleBot 4**                |
-|-----------------------------------|-------------------------------|--------------------------------|
-| **Weight and Size**               |                               |                                |
-| Dimensions External (LxWxH)       | 7.5 x 13.3 x 13.4 mm          | 13.8 x 13.3 x 13.4 mm          |
-| Weight                            | 7.2 lbs (3.3 kg)              | 8.6 lbs (3.9 kg)               |
-| Wheels Diameter                   | 0.55 in (14 mm)               | 0.55 in (14 mm)                |
-| Ground Clearance                  | 0.17 in (4.5 mm)              | 0.17 in (4.5 mm)               |
-| **Performance and Speed**         |                               |                                |
-| Payload Max (Default)             | 9 kg                          | 15 kg (Custom Configuration)   |
-| Max Speed                         | 0.46 m/s (Safe Mode)          | 0.31 m/s (Safe Mode)           |
-| Max Rotational Speed              | 1.90 s/rad                    | 1.90 s/rad                     |
-| **System Power and Battery**      |                               |                                |
-| Chemistry                         | Lithium Ion                   | Lithium Ion                    |
-| Nominal Voltage                   | 14.4 V                        | 14.4 V                         |
-| Battery Capacity                  | 26 Wh                         | 26 Wh                          |
-| Charge Time                       | 2.5 hrs                       | 2.5 hrs                        |
-| Operating Time                    | 4.0-2.5 hrs (Dependent on Load) | 4.0-2.5 hrs (Dependent on Load) |
-| **Sensors**                       |                               |                                |
-| LIDAR                             | 1A-RPLIDAR                    | 1A-RPLIDAR                     |
-| Camera                            | PRO-D-OAK                     | PRO-D-OAK                      |
-| Other Sensors                     | LITE-D-OAK                    | LITE-D-OAK                     |
-| **Actuators and Computers**       |                               |                                |
-| Actuators                         | Motors Drive x2               | Motors Drive x2                |
-| Computers                         | Pi Raspberry (4 GB)           | Pi Raspberry (4 GB)            |
-| **Software**                      |                               |                                |
-| ROS Version                       | 2.0.04                        | 2.0.04                         |
-| Operating System                  | Ubuntu                        | Ubuntu                         |
-
-</p>
+<table align="center">
+  <tr>
+    <th></th>
+    <th><strong>TurtleBot 4 Lite</strong></th>
+    <th><strong>TurtleBot 4</strong></th>
+  </tr>
+  <tr>
+    <td><strong>Weight and Size</strong></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Dimensions External (LxWxH)</td>
+    <td>7.5 x 13.3 x 13.4 mm</td>
+    <td>13.8 x 13.3 x 13.4 mm</td>
+  </tr>
+  <tr>
+    <td>Weight</td>
+    <td>7.2 lbs (3.3 kg)</td>
+    <td>8.6 lbs (3.9 kg)</td>
+  </tr>
+  <tr>
+    <td>Wheels Diameter</td>
+    <td>0.55 in (14 mm)</td>
+    <td>0.55 in (14 mm)</td>
+  </tr>
+  <tr>
+    <td>Ground Clearance</td>
+    <td>0.17 in (4.5 mm)</td>
+    <td>0.17 in (4.5 mm)</td>
+  </tr>
+  <tr>
+    <td><strong>Performance and Speed</strong></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Payload Max (Default)</td>
+    <td>9 kg</td>
+    <td>15 kg (Custom Configuration)</td>
+  </tr>
+  <tr>
+    <td>Max Speed</td>
+    <td>0.46 m/s (Safe Mode)</td>
+    <td>0.31 m/s (Safe Mode)</td>
+  </tr>
+  <tr>
+    <td>Max Rotational Speed</td>
+    <td>1.90 s/rad</td>
+    <td>1.90 s/rad</td>
+  </tr>
+  <tr>
+    <td><strong>System Power and Battery</strong></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Chemistry</td>
+    <td>Lithium Ion</td>
+    <td>Lithium Ion</td>
+  </tr>
+  <tr>
+    <td>Nominal Voltage</td>
+    <td>14.4 V</td>
+    <td>14.4 V</td>
+  </tr>
+  <tr>
+    <td>Battery Capacity</td>
+    <td>26 Wh</td>
+    <td>26 Wh</td>
+  </tr>
+  <tr>
+    <td>Charge Time</td>
+    <td>2.5 hrs</td>
+    <td>2.5 hrs</td>
+  </tr>
+  <tr>
+    <td>Operating Time</td>
+    <td>4.0-2.5 hrs (Dependent on Load)</td>
+    <td>4.0-2.5 hrs (Dependent on Load)</td>
+  </tr>
+  <tr>
+    <td><strong>Sensors</strong></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>LIDAR</td>
+    <td>1A-RPLIDAR</td>
+    <td>1A-RPLIDAR</td>
+  </tr>
+  <tr>
+    <td>Camera</td>
+    <td>PRO-D-OAK</td>
+    <td>PRO-D-OAK</td>
+  </tr>
+  <tr>
+    <td>Other Sensors</td>
+    <td>LITE-D-OAK</td>
+    <td>LITE-D-OAK</td>
+  </tr>
+  <tr>
+    <td><strong>Actuators and Computers</strong></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Actuators</td>
+    <td>3</td>
+    <td>4</td>
+  </tr>
+  <tr>
+    <td>Computers</td>
+    <td>Pi Raspberry (4 GB)</td>
+    <td>Pi Raspberry (4 GB)</td>
+  </tr>
+  <tr>
+    <td><strong>Software</strong></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>ROS Version</td>
+    <td>2.0.04</td>
+    <td>2.0.04</td>
+  </tr>
+  <tr>
+    <td>Operating System</td>
+    <td>Ubuntu</td>
+    <td>Ubuntu</td>
+  </tr>
+</table>
 
 # Installing ROS2
 
