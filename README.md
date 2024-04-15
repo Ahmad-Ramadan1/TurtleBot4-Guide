@@ -14,72 +14,31 @@ It uses a Create® 3 as the base platform, and builds on it with the TurtleBot 4
 The TurtleBot 4 Lite is a barebones version of the TurtleBot 4. It has just the necessary components for navigation, mapping, and AI applications. The TurtleBot 4 has the same Raspberry Pi 4B, which sits in the cargo bay of the Create® 3, as well as the same RPLIDAR A1M8. The camera on the TurtleBot 4 Lite is the OAK-D-Lite. Additional sensors and payloads can be attached to the Create® 3 faceplate, or placed inside the cargo bay.
 
 Sensors
-    
-    RPLIDAR A1M8
-            The RPLIDAR A1M8 is a 360 degree Laser Range Scanner with a 12m range. It is used to generate a 2D scan of the robot's surroundings.
+
+RPLIDAR A1M8
+The RPLIDAR A1M8 is a 360 degree Laser Range Scanner with a 12m range. It is used to generate a 2D scan of the robot's surroundings.
         
 
 
-    OAK-D-Pro
-     The OAK-D-Lite camera from Luxonis uses a 4K IMX214 colour sensor along with a pair of OV7251 stereo sensors to produce high quality colour and depth images. 
-     The on-board Myriad X VPU gives the camera the power to run computer vision applications, object tracking, and run AI models.
+OAK-D-Pro
+The OAK-D-Lite camera from Luxonis uses a 4K IMX214 colour sensor along with a pair of OV7251 stereo sensors to produce high quality colour and depth images. 
+The on-board Myriad X VPU gives the camera the power to run computer vision applications, object tracking, and run AI models.
         
 
-    OAK-D-Lite
-    The OAK-D-Pro offers all of the same features the OAK-D-Lite has, but uses higher resolution OV9282 stereo sensors and adds an IR laser dot projector and an 
-    IR illumination LED. This allows the camera to create higher quality depth images, and perform better in low-light environments.
+OAK-D-Lite
+The OAK-D-Pro offers all of the same features the OAK-D-Lite has, but uses higher resolution OV9282 stereo sensors and adds an IR laser dot projector and an IR illumination LED. This allows the camera to create higher quality depth images, and perform better in low-light environments.
 
 In our project, we are currently focusing on the development and integration of the TurtleBot 4. Below, you can find a table highlighting the key differences between the TurtleBot 4 and the TurtleBot 4 Lite. This comparison will help provide insight into the unique features and specifications of each model, aiding in decision-making and understanding their respective capabilities within our project.
 
-\begin{table}
-\centering
-\caption{Comparison of TurtleBot 4 Lite and TurtleBot 4}
-\label{tab:comparison}
-\begin{tabular}{@{}lll@{}}
-\toprule
-  & \begin{tabular}[c]{@{}l@{}} \textbf{TurtleBot 4 Lite}\end{tabular} & \begin{tabular}[c]{@{}l@{}} \textbf{TurtleBot 4}\end{tabular} \\
-\hline 
-\multicolumn{3}{c}{\textbf{Weight and Size}} \\ \midrule
-Dimensions External (LxWxH) & \begin{tabular}[c]{@{}l@{}}7.5 x 13.3 x 13.4 mm \\ (192 x 339 x 341 in)\end{tabular} & \begin{tabular}[c]{@{}l@{}}13.8 x 13.3 x 13.4 mm \\ (351 x 339 x 341 in)\end{tabular} \\
-Weight                      & \begin{tabular}[c]{@{}l@{}}7.2 lbs \\ (3.3 kg)\end{tabular}                              & \begin{tabular}[c]{@{}l@{}}8.6 lbs \\ (3.9 kg)\end{tabular}                              \\
-Wheels Diameter             & \begin{tabular}[c]{@{}l@{}}0.55 in \\ (14 mm)\end{tabular}                               & \begin{tabular}[c]{@{}l@{}}0.55 in \\ (14 mm)\end{tabular}                               \\
-Ground Clearance            & \begin{tabular}[c]{@{}l@{}}0.17 in \\ (4.5 mm)\end{tabular}                              & \begin{tabular}[c]{@{}l@{}}0.17 in \\ (4.5 mm)\end{tabular}                              \\ \midrule
-\multicolumn{3}{c}{\textbf{Performance and Speed}}                                                \\ \midrule
-Payload Max (Default)       & 9 kg                                           & 15 kg (Custom Configuration)                  \\
-Max Speed                   & \begin{tabular}[c]{@{}l@{}}0.46 m/s \\ (Safe Mode)\end{tabular}                          & \begin{tabular}[c]{@{}l@{}}0.31 m/s \\ (Safe Mode)\end{tabular}                          \\
-Max Rotational Speed        & 1.90 s/rad                                     & 1.90 s/rad                                    \\ \midrule
-\multicolumn{3}{c}{\textbf{System Power and Battery}}                                              \\ \midrule
-Chemistry                   & Lithium Ion                                    & Lithium Ion                                   \\
-Nominal Voltage             & 14.4 V                                         & 14.4 V                                        \\
-Battery Capacity            & 26 Wh                                          & 26 Wh                                         \\
-Charge Time                 & 2.5 hrs                                        & 2.5 hrs                                       \\
-Operating Time              & 4.0-2.5 hrs (Dependent on Load)               & 4.0-2.5 hrs (Dependent on Load)              \\ \midrule
-\multicolumn{3}{c}{\textbf{Sensors}}                                                                \\ \midrule
-LIDAR                       & 1A-RPLIDAR                                     & 1A-RPLIDAR                                    \\
-Camera                      & PRO-D-OAK                                      & PRO-D-OAK                                     \\
-Other Sensors               & LITE-D-OAK                                     & LITE-D-OAK                                    \\ \midrule
-\multicolumn{3}{c}{\textbf{Actuators and Computers}}                                                \\ \midrule
-Actuators                   & Motors Drive x2                                & Motors Drive x2                               \\
-Computers                   & Pi Raspberry (4 GB)                            & Pi Raspberry (4 GB)                           \\ \midrule
-\multicolumn{3}{c}{\textbf{Software}}                                                                \\ \midrule
-ROS Version                 & 2.0.04                                         & 2.0.04                                        \\
-Operating System            & Ubuntu                                         & Ubuntu                                        \\ \bottomrule
-\end{tabular}
-\end{table}
-
-\newpage
-
 Installing ROS2
-
     > sudo apt update && sudo apt install locales
     > sudo locale-gen en_US en_US.UTF-8
     > sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
     > export LANG=en_US.UTF-8
     
-    We observe the installation with the "locale" command
+We observe the installation with the "locale" command
 
-
-    Source configuration
+Source configuration
     > sudo apt install software-properties-common
     > sudo add-apt-repository universe
     > sudo apt update && sudo apt install curl -y
@@ -89,117 +48,116 @@ Installing ROS2
     signed-by=/usr/share/keyrings/ros-archive-keyring.gpg]
     http://packages.ros.org/ros2/ubuntu $(. /etc/os-release 
     && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
-        
-    \newpage
-
-    Installing ROS2 packages
+         
+         
+Installing ROS2 packages
     
-        Apt update
-        > sudo apt update
-        > sudo apt upgrade
+Apt update
+> sudo apt update
+> sudo apt upgrade
 
-    Installing ROS2 packages 
-        To install ROS2, there are 2 choices:
-            the full version including graphics libraries, example codes, etc.;
-             the “lite” version with only what is needed to run ROS2
+Installing ROS2 packages 
+To install ROS2, there are 2 choices:
+1) the full version including graphics libraries, example codes, etc.;
+2) the “lite” version with only what is needed to run ROS2
            
-        The second installation is often used for systems where resources are “limited” like a RaspberryPI for example.
-            Installing ROS2 packages:
-            > sudo apt install ros-humble-desktop
+The second installation is often used for systems where resources are “limited” like a RaspberryPI for example.
+Installing ROS2 packages:
+> sudo apt install ros-humble-desktop
             
-            Installation of ROS2 Limited:
-            > sudo apt install ros-humble-ros-base
+Installation of ROS2 Limited:
+> sudo apt install ros-humble-ros-base
             
-        If you go to the official ROS2 Humble installation site, they present a "Development Tool" when installing ROS2. You have the option of installing it for your own reasons. In this document, we don't use it.
+    If you go to the official ROS2 Humble installation site, they present a "Development Tool" when installing ROS2. You have the option of installing it for your own reasons. In this document, we don't use it.
 
-    ROS2 environment configuration
-      To use ROS2, it is necessary to "source" its installation folder in order to use ROS2 commands in terminals. We modify the "bashrc" script as follows.
-      > gedit ~/.bashrc
+ROS2 environment configuration
+  To use ROS2, it is necessary to "source" its installation folder in order to use ROS2 commands in terminals. We modify the "bashrc" script as follows.
+  > gedit ~/.bashrc
 
-     A text editor window should open. At the end of this text file the following lines and save. The second line enables systems using ROS2 to communicate via WIFI on a network described by the ROS domain ID (default '0').
+ A text editor window should open. At the end of this text file the following lines and save. The second line enables systems using ROS2 to communicate via WIFI on a network described by the ROS domain ID (default '0').
 
-     > source /opt/ros/humble/setup.bash
-     > export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
-     > export ROS_DOMAIN_ID=0
+ > source /opt/ros/humble/setup.bash
+ > export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+ > export ROS_DOMAIN_ID=0
 
-     To update the .bashrc file in your terminal, run the following command.
-     > source ~/.bashrc
-     Note: You can also restart your terminal
+ To update the .bashrc file in your terminal, run the following command.
+ > source ~/.bashrc
+ Note: You can also restart your terminal
 
-    ROS2 installation test
-    Test nodes are available to verify ROS2 installation. Run two different terminals and run the following commands.
-        
-        Terminal 1:
-        > ros2 run demo_nodes_cpp talker
-        
-        Terminal 2:
-        > ros2 run demo_nodes_cpp listener
+ROS2 installation test
+Test nodes are available to verify ROS2 installation. Run two different terminals and run the following commands.
+    
+    Terminal 1:
+    > ros2 run demo_nodes_cpp talker
+    
+    Terminal 2:
+    > ros2 run demo_nodes_cpp listener
 
-     You need to get similar results (the terminals talk to each other).
+ You need to get similar results (the terminals talk to each other).
 
-    Installing the colcon compiler
-    The colcon compiler can be used to build a ROS2 application.
-    Here are the commands to write in a terminal.
+Installing the colcon compiler
+The colcon compiler can be used to build a ROS2 application.
+Here are the commands to write in a terminal.
 
-    > sudo apt update
-    > sudo apt install python3-colcon-common-extensions
+> sudo apt update
+> sudo apt install python3-colcon-common-extensions
 
-    To make the compiler easier to use, we mouse over the compiler path in the .bashrc file as :
-    > gedit ~/.bashrc
+To make the compiler easier to use, we mouse over the compiler path in the .bashrc file as :
+> gedit ~/.bashrc
 
-    Then, in this file, below the ROS2 sourcing in the "ROS2 installation" section, we write the following line and save it. "ROS2 installation" section, we 
-     write the following line and save.
-    > source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
+Then, in this file, below the ROS2 sourcing in the "ROS2 installation" section, we write the following line and save it. "ROS2 installation" section, we 
+ write the following line and save.
+> source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
 
-    To update the .bashrc file in your terminal, run the following command.
-    > source ~/.bashrc
+To update the .bashrc file in your terminal, run the following command.
+> source ~/.bashrc
 
-    Note: You can also restart your terminal
+Note: You can also restart your terminal
 
 
 Turtlebot4 installation and configuration:
 
-    \item[] \hspace{1em} \textbf{1)} \textbf{Preparing the WIFI network} 
+\item[] \hspace{1em} \textbf{1)} \textbf{Preparing the WIFI network} 
+\begin{itemize}
+\item Firstly, it is important to configure a network to support at least two wifi bands (2.4GHz and 5GHz). The minimum hardware needed to monitor a turtlebot4 is:
     \begin{itemize}
-    \item Firstly, it is important to configure a network to support at least two wifi bands (2.4GHz and 5GHz). The minimum hardware needed to monitor a turtlebot4 is:
-        \begin{itemize}
-        \item A WIFI terminal (or cell phone access point) connected to the Internet
-        \item A computer running Linux Ubuntu 22.04 with ROS2 for supervision purposes       
-        \item Turtlebot4
-        \end{itemize}
-    In the case of a network not connected to the Internet, you'll need another computer, preferably running Linux Ubuntu 22.04. The purpose of this computer is to synchronize all equipment connected to the network by broadcasting the date and time using the NTP time protocol.
+    \item A WIFI terminal (or cell phone access point) connected to the Internet
+    \item A computer running Linux Ubuntu 22.04 with ROS2 for supervision purposes       
+    \item Turtlebot4
     \end{itemize}
+In the case of a network not connected to the Internet, you'll need another computer, preferably running Linux Ubuntu 22.04. The purpose of this computer is to synchronize all equipment connected to the network by broadcasting the date and time using the NTP time protocol.
+\end{itemize}
 
-    \item[] \hspace{1em} \textbf{2)} \textbf{ROS2 package installation for turtlebot4}
-    \begin{itemize}
-    \item On the supervision computer, open a terminal and enter the following commands:
-    \end{itemize}
-    \begin{verbatim}
-    > sudo apt update && sudo apt install ros-humble-turtlebot4-desktop
-    > sudo apt install ros-humble-turtlebot4-description 
-    > ros-humble-turtlebot4-msgs 
-    > ros-humble-turtlebot4-navigation 
-    > ros-humble-turtlebot4-node
-    \end{verbatim}
+\item[] \hspace{1em} \textbf{2)} \textbf{ROS2 package installation for turtlebot4}
+\begin{itemize}
+\item On the supervision computer, open a terminal and enter the following commands:
+\end{itemize}
+\begin{verbatim}
+> sudo apt update && sudo apt install ros-humble-turtlebot4-desktop
+> sudo apt install ros-humble-turtlebot4-description 
+> ros-humble-turtlebot4-msgs 
+> ros-humble-turtlebot4-navigation 
+> ros-humble-turtlebot4-node
+\end{verbatim}
 
-    \item[] \hspace{1em} \textbf{3)} \textbf{Turtlebot4 configuration}
+\item[] \hspace{1em} \textbf{3)} \textbf{Turtlebot4 configuration}
+\begin{itemize}
+\item To configure turtlebot4 correctly, it's important to keep the system up to date with the latest patches. To do this, we first update the turtlebot's components, and then configure their parameters.
     \begin{itemize}
-    \item To configure turtlebot4 correctly, it's important to keep the system up to date with the latest patches. To do this, we first update the turtlebot's components, and then configure their parameters.
-        \begin{itemize}
-            \item RaspberryPi firmware update \\
-            To update the RaspberryPI, you need to extract the micro SD card from the RaspberryPI card. \\
-            We now use a micro SD to SD adapter and insert the card into our into the SD drive of our computer running Linux Ubuntu 22.04. \\
-            We open the 'disques' or 'disks' utility and select the SD card. We format overwriting existing data with zeros and without partitioning. \\
-            We download the latest update from the following site, taking into account the version of ROS2 (here Humble): http://download.ros.org/downloads/turtlebot4/ \\
-            We extract the .img file from the downloaded .zip file and enter the following command in a terminal.
+        \item RaspberryPi firmware update \\
+        To update the RaspberryPI, you need to extract the micro SD card from the RaspberryPI card. \\
+        We now use a micro SD to SD adapter and insert the card into our into the SD drive of our computer running Linux Ubuntu 22.04. \\
+        We open the 'disques' or 'disks' utility and select the SD card. We format overwriting existing data with zeros and without partitioning. \\
+        We download the latest update from the following site, taking into account the version of ROS2 (here Humble): http://download.ros.org/downloads/turtlebot4/ \\
+        We extract the .img file from the downloaded .zip file and enter the following command in a terminal.
 \begin{verbatim}
 > wget https://raw.githubusercontent.com/turtlebot/turtlebot4_setup/humble/
 scripts/sd_flash.sh
 > bash sd_flash.sh /chemin/de/l’image.img
 \end{verbatim}
-            To find the name of the SD card, go to the 'disque' or 'disks' utility select the SD card and find the name next to 'Device' (in our case, we have /dev/mmcblk0'. \\
-            When the terminal asks for the SD card name, we enter 'mmcblk0' and continue. \\
-            We put the SD card back into turtlebot4 and reassemble the robot.
+        To find the name of the SD card, go to the 'disque' or 'disks' utility select the SD card and find the name next to 'Device' (in our case, we have /dev/mmcblk0'. \\
+        When the terminal asks for the SD card name, we enter 'mmcblk0' and continue. \\
+        We put the SD card back into turtlebot4 and reassemble the robot.
             
             \item CREATE3 card update \\
             Switch on the turtlebot4 by positioning it on its charging base connected to the mains and wait for the robot to play a sound. \\
