@@ -14,14 +14,14 @@ The TurtleBot 4 Lite is a barebones version of the TurtleBot 4. It has just the 
 
 # Sensors
 
-1) RPLIDAR A1M8
+## 1) RPLIDAR A1M8
 The RPLIDAR A1M8 is a 360 degree Laser Range Scanner with a 12m range. It is used to generate a 2D scan of the robot's surroundings.
         
-2)  OAK-D-Pro
+## 2)  OAK-D-Pro
 The OAK-D-Lite camera from Luxonis uses a 4K IMX214 colour sensor along with a pair of OV7251 stereo sensors to produce high quality colour and depth images. 
 The on-board Myriad X VPU gives the camera the power to run computer vision applications, object tracking, and run AI models.
         
-3) OAK-D-Lite
+## 3) OAK-D-Lite
 The OAK-D-Pro offers all of the same features the OAK-D-Lite has, but uses higher resolution OV9282 stereo sensors and adds an IR laser dot projector and an IR illumination LED. This allows the camera to create higher quality depth images, and perform better in low-light environments.
 
 In our project, we are currently focusing on the development and integration of the TurtleBot 4. Below, you can find a table highlighting the key differences between the TurtleBot 4 and the TurtleBot 4 Lite. This comparison will help provide insight into the unique features and specifications of each model, aiding in decision-making and understanding their respective capabilities within our project.
