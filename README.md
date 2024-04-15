@@ -1,55 +1,33 @@
 # TurtleBot4-Guide
-```latex ... ```
 Implementation of TurtleBot with ROS2: Development and Integration
 
 Background:
 
-ROS 2 stands for "Robot Operating System 2". It's an open-source framework for writing robot software. It's designed to be a flexible platform for developing robotics applications. ROS 2 is a successor to ROS, aiming to address limitations and improve upon its predecessor's functionalities. It offers improved real-time capabilities, better support for various hardware platforms, and enhanced security features, among other advancements. \\
-ROS 2 relies on the notion of combining workspaces using the shell environment. “Workspace” is a ROS term for the location on your system where you’re developing with ROS 2. The core ROS 2 workspace is called the underlay. Subsequent local workspaces are called overlays. When developing with ROS 2, you will typically have several workspaces active concurrently. \\
-Combining workspaces makes developing against different versions of ROS 2, or against different sets of packages, easier. It also allows the installation of several ROS 2 distributions (distros) on the same computer and switching between them. \\
+ROS 2 stands for "Robot Operating System 2". It's an open-source framework for writing robot software. It's designed to be a flexible platform for developing robotics applications. ROS 2 is a successor to ROS, aiming to address limitations and improve upon its predecessor's functionalities. It offers improved real-time capabilities, better support for various hardware platforms, and enhanced security features, among other advancements. 
+ROS 2 relies on the notion of combining workspaces using the shell environment. “Workspace” is a ROS term for the location on your system where you’re developing with ROS 2. The core ROS 2 workspace is called the underlay. Subsequent local workspaces are called overlays. When developing with ROS 2, you will typically have several workspaces active concurrently. 
+Combining workspaces makes developing against different versions of ROS 2, or against different sets of packages, easier. It also allows the installation of several ROS 2 distributions (distros) on the same computer and switching between them. 
 This is accomplished by sourcing setup files every time you open a new shell, or by adding the source command to your shell startup script once. Without sourcing the setup files, you won’t be able to access ROS 2 commands, or find or use ROS 2 packages. In other words, you won’t be able to use ROS 2.
 
-\subsubsection{TurtleBot4}
-The TurtleBot 4 is a ROS 2-based mobile robot intended for education and research. The TurtleBot 4 is capable of mapping the robot's surroundings, navigating autonomously, running AI models on its camera, and more. \\
-It uses a Create® 3 as the base platform, and builds on it with the TurtleBot 4 shell and User Interface (UI) board. Inside the shell sits a Raspberry Pi 4B which runs the TurtleBot 4 software. \\
+TurtleBot4
+The TurtleBot 4 is a ROS 2-based mobile robot intended for education and research. The TurtleBot 4 is capable of mapping the robot's surroundings, navigating autonomously, running AI models on its camera, and more. 
+It uses a Create® 3 as the base platform, and builds on it with the TurtleBot 4 shell and User Interface (UI) board. Inside the shell sits a Raspberry Pi 4B which runs the TurtleBot 4 software. 
 The TurtleBot 4 Lite is a barebones version of the TurtleBot 4. It has just the necessary components for navigation, mapping, and AI applications. The TurtleBot 4 has the same Raspberry Pi 4B, which sits in the cargo bay of the Create® 3, as well as the same RPLIDAR A1M8. The camera on the TurtleBot 4 Lite is the OAK-D-Lite. Additional sensors and payloads can be attached to the Create® 3 faceplate, or placed inside the cargo bay.
 
-\begin{itemize}
-
-    \item \textbf{Sensors:} \\
+Sensors
     
-    \item[] \hspace{1em} \textbf{1)} \textbf{RPLIDAR A1M8} 
-    \begin{itemize}
-        \begin{minipage}{0.65\textwidth}
-            \item The RPLIDAR A1M8 is a 360 degree Laser Range Scanner with a 12m range. It is used to generate a 2D scan of the robot's surroundings.
-        \end{minipage}
-        \begin{minipage}{0.3\textwidth}
-            \includegraphics[width=\linewidth]{Images/rplidar_a1m8.png}
-        \end{minipage}
-    \end{itemize}
+    RPLIDAR A1M8
+            The RPLIDAR A1M8 is a 360 degree Laser Range Scanner with a 12m range. It is used to generate a 2D scan of the robot's surroundings.
+        
 
 
-    \item[] \hspace{1em} \textbf{2)} \textbf{OAK-D-Pro} 
-    \begin{itemize}
-        \begin{minipage}{0.65\textwidth}
-            \item The OAK-D-Lite camera from Luxonis uses a 4K IMX214 colour sensor along with a pair of OV7251 stereo sensors to produce high quality colour and depth images. The on-board Myriad X VPU gives the camera the power to run computer vision applications, object tracking, and run AI models.
-        \end{minipage}
-        \begin{minipage}{0.3\textwidth}
-            \includegraphics[width=\linewidth]{Images/oak-d-pro.png}
-        \end{minipage}
-    \end{itemize}
+    OAK-D-Pro
+     The OAK-D-Lite camera from Luxonis uses a 4K IMX214 colour sensor along with a pair of OV7251 stereo sensors to produce high quality colour and depth images. 
+     The on-board Myriad X VPU gives the camera the power to run computer vision applications, object tracking, and run AI models.
+        
 
-    \item[] \hspace{1em} \textbf{3)} \textbf{OAK-D-Lite} 
-    \begin{itemize}
-        \begin{minipage}{0.65\textwidth}
-            \item The OAK-D-Pro offers all of the same features the OAK-D-Lite has, but uses higher resolution OV9282 stereo sensors and adds an IR laser dot projector and an IR illumination LED. This allows the camera to create higher quality depth images, and perform better in low-light environments.
-        \end{minipage}
-        \begin{minipage}{0.3\textwidth}
-            \includegraphics[width=\linewidth]{Images/oak-d-lite.png}
-        \end{minipage}
-    \end{itemize}
-
-\end{itemize}
+    OAK-D-Lite
+    The OAK-D-Pro offers all of the same features the OAK-D-Lite has, but uses higher resolution OV9282 stereo sensors and adds an IR laser dot projector and an 
+    IR illumination LED. This allows the camera to create higher quality depth images, and perform better in low-light environments.
 
 In our project, we are currently focusing on the development and integration of the TurtleBot 4. Below, you can find a table highlighting the key differences between the TurtleBot 4 and the TurtleBot 4 Lite. This comparison will help provide insight into the unique features and specifications of each model, aiding in decision-making and understanding their respective capabilities within our project.
 
@@ -91,27 +69,17 @@ Operating System            & Ubuntu                                         & U
 
 \newpage
 
-\begin{itemize}
+Installing ROS2
 
-    \item \textbf{Installing ROS2:} \\
-    
-    \item[] \hspace{1em} \textbf{1)} \textbf{Implementation of the UTF-8 Format} 
-    \begin{verbatim}
     > sudo apt update && sudo apt install locales
     > sudo locale-gen en_US en_US.UTF-8
     > sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
     > export LANG=en_US.UTF-8
-    \end{verbatim}
-    \hspace{0.9cm} We observe the installation with the "locale" command
-    \begin{figure}[h]
-        \centering
-        \includegraphics[width=0.5\textwidth]{Images/Locale Command.jpg}
-         \caption{locale Command}
-        \label{fig: locale Command}
-    \end{figure}
+    
+    We observe the installation with the "locale" command
 
-    \item[] \hspace{1em} \textbf{2)} \textbf{Source configuration}
-    \begin{verbatim}
+
+    Source configuration
     > sudo apt install software-properties-common
     > sudo add-apt-repository universe
     > sudo apt update && sudo apt install curl -y
@@ -121,116 +89,75 @@ Operating System            & Ubuntu                                         & U
     signed-by=/usr/share/keyrings/ros-archive-keyring.gpg]
     http://packages.ros.org/ros2/ubuntu $(. /etc/os-release 
     && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
-    \end{verbatim}
         
     \newpage
 
-    \item[] \hspace{1em} \textbf{3)} \textbf{Installing ROS2 packages}
-    \begin{itemize}
-    \item Apt update
-    \end{itemize}
-    \begin{verbatim}
-    > sudo apt update
-    > sudo apt upgrade
-    \end{verbatim}
-
-    \begin{itemize}
-    \item Installing ROS2 packages 
-        \begin{itemize}
-        \item To install ROS2, there are 2 choices:
-            \begin{itemize}
-            \item the full version including graphics libraries, example codes, etc.;
+    Installing ROS2 packages
     
-            \item the “lite” version with only what is needed to run ROS2
-            \end{itemize}
+        Apt update
+        > sudo apt update
+        > sudo apt upgrade
+
+    Installing ROS2 packages 
+        To install ROS2, there are 2 choices:
+            the full version including graphics libraries, example codes, etc.;
+             the “lite” version with only what is needed to run ROS2
+           
         The second installation is often used for systems where resources are “limited” like a RaspberryPI for example.
-        \item Installing ROS2 packages:
-\begin{verbatim}
-> sudo apt install ros-humble-desktop
-\end{verbatim}
-        \item Installation of ROS2 Limited:
-\begin{verbatim}
-> sudo apt install ros-humble-ros-base
-\end{verbatim}
+            Installing ROS2 packages:
+            > sudo apt install ros-humble-desktop
+            
+            Installation of ROS2 Limited:
+            > sudo apt install ros-humble-ros-base
+            
         If you go to the official ROS2 Humble installation site, they present a "Development Tool" when installing ROS2. You have the option of installing it for your own reasons. In this document, we don't use it.
-        \end{itemize}
-    \end{itemize}
 
-    \item[] \hspace{1em} \textbf{4)} \textbf{ROS2 environment configuration}
-     \begin{itemize}
-     \item To use ROS2, it is necessary to "source" its installation folder in order to use ROS2 commands in terminals. We modify the "bashrc" script as follows.
-\begin{verbatim}
-> gedit ~/.bashrc
-\end{verbatim}
+    ROS2 environment configuration
+      To use ROS2, it is necessary to "source" its installation folder in order to use ROS2 commands in terminals. We modify the "bashrc" script as follows.
+      > gedit ~/.bashrc
+
      A text editor window should open. At the end of this text file the following lines and save. The second line enables systems using ROS2 to communicate via WIFI on a network described by the ROS domain ID (default '0').
-\begin{verbatim}
-> source /opt/ros/humble/setup.bash
-> export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
-> export ROS_DOMAIN_ID=0
-\end{verbatim}
+
+     > source /opt/ros/humble/setup.bash
+     > export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+     > export ROS_DOMAIN_ID=0
+
      To update the .bashrc file in your terminal, run the following command.
-\begin{verbatim}
-> source ~/.bashrc
-\end{verbatim}
-     \textbf{Note}: You can also restart your terminal
-     \end{itemize}
+     > source ~/.bashrc
+     Note: You can also restart your terminal
 
-\newpage
+    ROS2 installation test
+    Test nodes are available to verify ROS2 installation. Run two different terminals and run the following commands.
+        
+        Terminal 1:
+        > ros2 run demo_nodes_cpp talker
+        
+        Terminal 2:
+        > ros2 run demo_nodes_cpp listener
 
-    \item[] \hspace{1em} \textbf{5)} \textbf{ROS2 installation test}
-     \begin{itemize}
-     \item Test nodes are available to verify ROS2 installation. Run two different terminals and run the following commands.
-
-        \begin{itemize}
-        \item Terminal 1:
-\begin{verbatim}
-> ros2 run demo_nodes_cpp talker
-\end{verbatim}
-
-        \item Terminal 2:
-\begin{verbatim}
-> ros2 run demo_nodes_cpp listener
-\end{verbatim}
-        \end{itemize}
      You need to get similar results (the terminals talk to each other).
-    \end{itemize}
 
-    \begin{figure}[h]
-        \centering
-        \includegraphics[width=0.9\textwidth]{Images/Talker-Listener.jpg}
-         \caption{Talker-Listener}
-        \label{fig: Talker-Listener}
-    \end{figure}
+    Installing the colcon compiler
+    The colcon compiler can be used to build a ROS2 application.
+    Here are the commands to write in a terminal.
 
-    \item[] \hspace{1em} \textbf{6)} \textbf{Installing the colcon compiler}
-     \begin{itemize}
-     \item The colcon compiler can be used to build a ROS2 application.\\
-     Here are the commands to write in a terminal.
-\begin{verbatim}
-> sudo apt update
-> sudo apt install python3-colcon-common-extensions
-\end{verbatim}
-     To make the compiler easier to use, we mouse over the compiler path in the .bashrc file as :
-\begin{verbatim}
-> gedit ~/.bashrc
-\end{verbatim}
-     Then, in this file, below the ROS2 sourcing in the "ROS2 installation" section, we write the following line and save it. "ROS2 installation" section, we write the following line and save.
-\begin{verbatim}
-> source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
-\end{verbatim}
-     To update the .bashrc file in your terminal, run the following command.
-\begin{verbatim}
-> source ~/.bashrc
-\end{verbatim}
-     \textbf{Note}: You can also restart your terminal
-     \end{itemize}
+    > sudo apt update
+    > sudo apt install python3-colcon-common-extensions
 
-\end{itemize}
+    To make the compiler easier to use, we mouse over the compiler path in the .bashrc file as :
+    > gedit ~/.bashrc
 
-\newpage
+    Then, in this file, below the ROS2 sourcing in the "ROS2 installation" section, we write the following line and save it. "ROS2 installation" section, we 
+     write the following line and save.
+    > source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
 
-\begin{itemize}
-    \item \textbf{Turtlebot4 installation and configuration:} \\
+    To update the .bashrc file in your terminal, run the following command.
+    > source ~/.bashrc
+
+    Note: You can also restart your terminal
+
+
+Turtlebot4 installation and configuration:
 
     \item[] \hspace{1em} \textbf{1)} \textbf{Preparing the WIFI network} 
     \begin{itemize}
