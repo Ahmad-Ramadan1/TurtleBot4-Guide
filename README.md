@@ -113,218 +113,141 @@ Note: You can also restart your terminal
 
 #### Turtlebot4 installation and configuration:
 
-\item[] \hspace{1em} \textbf{1)} \textbf{Preparing the WIFI network} 
-\begin{itemize}
-\item Firstly, it is important to configure a network to support at least two wifi bands (2.4GHz and 5GHz). The minimum hardware needed to monitor a turtlebot4 is:
-    \begin{itemize}
-    \item A WIFI terminal (or cell phone access point) connected to the Internet
-    \item A computer running Linux Ubuntu 22.04 with ROS2 for supervision purposes       
-    \item Turtlebot4
-    \end{itemize}
+##### Preparing the WIFI network
+Firstly, it is important to configure a network to support at least two wifi bands (2.4GHz and 5GHz). The minimum hardware needed to monitor a turtlebot4 is:
+A WIFI terminal (or cell phone access point) connected to the Internet
+A computer running Linux Ubuntu 22.04 with ROS2 for supervision purposes       
+Turtlebot4
 In the case of a network not connected to the Internet, you'll need another computer, preferably running Linux Ubuntu 22.04. The purpose of this computer is to synchronize all equipment connected to the network by broadcasting the date and time using the NTP time protocol.
-\end{itemize}
 
-\item[] \hspace{1em} \textbf{2)} \textbf{ROS2 package installation for turtlebot4}
-\begin{itemize}
-\item On the supervision computer, open a terminal and enter the following commands:
-\end{itemize}
-\begin{verbatim}
+##### ROS2 package installation for turtlebot4
+On the supervision computer, open a terminal and enter the following commands:
 > sudo apt update && sudo apt install ros-humble-turtlebot4-desktop
 > sudo apt install ros-humble-turtlebot4-description 
 > ros-humble-turtlebot4-msgs 
 > ros-humble-turtlebot4-navigation 
 > ros-humble-turtlebot4-node
-\end{verbatim}
 
-\item[] \hspace{1em} \textbf{3)} \textbf{Turtlebot4 configuration}
-\begin{itemize}
-\item To configure turtlebot4 correctly, it's important to keep the system up to date with the latest patches. To do this, we first update the turtlebot's components, and then configure their parameters.
-    \begin{itemize}
-        \item RaspberryPi firmware update \\
-        To update the RaspberryPI, you need to extract the micro SD card from the RaspberryPI card. \\
-        We now use a micro SD to SD adapter and insert the card into our into the SD drive of our computer running Linux Ubuntu 22.04. \\
-        We open the 'disques' or 'disks' utility and select the SD card. We format overwriting existing data with zeros and without partitioning. \\
-        We download the latest update from the following site, taking into account the version of ROS2 (here Humble): http://download.ros.org/downloads/turtlebot4/ \\
-        We extract the .img file from the downloaded .zip file and enter the following command in a terminal.
-\begin{verbatim}
-> wget https://raw.githubusercontent.com/turtlebot/turtlebot4_setup/humble/
-scripts/sd_flash.sh
+##### Turtlebot4 configuration
+To configure turtlebot4 correctly, it's important to keep the system up to date with the latest patches. To do this, we first update the turtlebot's components, and then configure their parameters.
+
+###### RaspberryPi firmware update 
+To update the RaspberryPI, you need to extract the micro SD card from the RaspberryPI card. 
+We now use a micro SD to SD adapter and insert the card into our into the SD drive of our computer running Linux Ubuntu 22.04. 
+We open the 'disques' or 'disks' utility and select the SD card. We format overwriting existing data with zeros and without partitioning. 
+We download the latest update from the following site, taking into account the version of ROS2 (here Humble): http://download.ros.org/downloads/turtlebot4/
+We extract the .img file from the downloaded .zip file and enter the following command in a terminal.
+> wget https://raw.githubusercontent.com/turtlebot/turtlebot4_setup/humble/scripts/sd_flash.sh
 > bash sd_flash.sh /chemin/de/l’image.img
-\end{verbatim}
-        To find the name of the SD card, go to the 'disque' or 'disks' utility select the SD card and find the name next to 'Device' (in our case, we have /dev/mmcblk0'. \\
-        When the terminal asks for the SD card name, we enter 'mmcblk0' and continue. \\
-        We put the SD card back into turtlebot4 and reassemble the robot.
-            
-            \item CREATE3 card update \\
-            Switch on the turtlebot4 by positioning it on its charging base connected to the mains and wait for the robot to play a sound. \\
-            On the supervision computer, download the latest version of Create3 (here Humble H2.6). Then connect to the turtlebot4's wifi network (SSID: 'Turtlebot4' | Mdp: 'Turtlebot4'). \\
-            Go to a web browser and enter in the address bar the ip '10.42.0.1:8080'. In the 'Update' tab, follow the update instructions.
 
-            \begin{figure}[h]
-            \centering
-            \includegraphics[width=0.65\textwidth]{Images/Update Robot.jpg}
-            \caption{Update Robot}
-            \label{fig: Update Robot}
-            \end{figure} 
+To find the name of the SD card, go to the 'disque' or 'disks' utility select the SD card and find the name next to 'Device' (in our case, we have /dev/mmcblk0'. 
+When the terminal asks for the SD card name, we enter 'mmcblk0' and continue. 
+We put the SD card back into turtlebot4 and reassemble the robot.
             
-            \item RaspberryPi configuration \\
-            Switch on turtlebot4 by positioning it on its charging base connected to the mains and wait for the robot to broadcast a sound. \\
-            On the supervision computer, connect to the turtlebot4's wifi network (SSID: 'Turtlebot4' | Mdp: 'Turtlebot4'). Go to the remote access session of the turtlebot4 by typing the following command in a terminal:
-\begin{verbatim}
+###### item CREATE3 card update 
+Switch on the turtlebot4 by positioning it on its charging base connected to the mains and wait for the robot to play a sound. \\
+On the supervision computer, download the latest version of Create3 (here Humble H2.6). Then connect to the turtlebot4's wifi network (SSID: 'Turtlebot4' | Mdp: 'Turtlebot4'). \\
+Go to a web browser and enter in the address bar the ip '10.42.0.1:8080'. In the 'Update' tab, follow the update instructions.
+
+###### RaspberryPi configuration 
+Switch on turtlebot4 by positioning it on its charging base connected to the mains and wait for the robot to broadcast a sound. \\
+On the supervision computer, connect to the turtlebot4's wifi network (SSID: 'Turtlebot4' | Mdp: 'Turtlebot4'). Go to the remote access session of the turtlebot4 by typing the following command in a terminal:
 > ssh ubuntu@10.42.0.1
-\end{verbatim}
-            The session password is 'turtlebot4'. \\
-            Once connected to turtlebot4, type the following command to configure the robot's parameters.
-\begin{verbatim}
+
+The session password is 'turtlebot4'. 
+Once connected to turtlebot4, type the following command to configure the robot's parameters.
 > turtlebot4-setup
-\end{verbatim}
-            A graphical interface opens. \\
-            Go to WIFI-SETUP and connect the robot as a client to your wifi network (it's more optimal to connect the turtlebot4 to 5GHz).
-            Save and apply changes (you'll be disconnected from the turtlebot's internal wifi). \\
-            Connect to your wifi network and go to the remote access session of the turtlebot4 by typing the following command in a terminal:
-\begin{verbatim}
+
+A graphical interface opens.
+Go to WIFI-SETUP and connect the robot as a client to your wifi network (it's more optimal to connect the turtlebot4 to 5GHz).
+Save and apply changes (you'll be disconnected from the turtlebot's internal wifi). 
+Connect to your wifi network and go to the remote access session of the turtlebot4 by typing the following command in a terminal:
 > ssh ubuntu@’ip ecrite sur le turtlebot4’
-\end{verbatim}
-            If you have a lite version of turtlebot4, type the command '> ros2 topic echo /ip' on your supervision PC to find out the ip of the robot connected to your network. \\
-            If you've mistakenly written the SSID and wifi password on the turtlebot4, please visit this site: \\
-            https://turtlebot.github.io/turtlebot4-user-manual/setup/basic.html . \\
-            If you wish to modify the \texttt{ROS\_DOMAIN\_ID} variable, go to the \texttt{ROS-SETUP} menu, then \texttt{BASH-SETUP}. \\ Save and apply the changes.
 
-             \item Create3 card configuration \\
-             Go to the turtlebot4 online space with a browser and the following ip: robot ip':8080 and connect the create3 card to your wifi network using the 'connect' tab.
-             \begin{figure}[h]
-             \centering
-             \includegraphics[width=0.65\textwidth]{Images/Connect Robot to WIFI.jpg}
-             \caption{Connect Robot to WIFI}
-             \label{fig: Connect Robot to WIFI}
-             \end{figure} 
-             
-             Click 'connect' and the robot restarts. \\
-              
-             \newpage
-              
-             In the 'Application' tab, then 'Configuration', you can modify the ROS2 parameters (ensure that these parameters are identical to those on the RaspberryPi board). \\
+If you have a lite version of turtlebot4, type the command '> ros2 topic echo /ip' on your supervision PC to find out the ip of the robot connected to your network. 
+If you've mistakenly written the SSID and wifi password on the turtlebot4, please visit this site: 
+https://turtlebot.github.io/turtlebot4-user-manual/setup/basic.html . 
+If you wish to modify the \texttt{ROS\_DOMAIN\_ID} variable, go to the \texttt{ROS-SETUP} menu, then \texttt{BASH-SETUP}.
+Save and apply the changes.
 
-             \begin{figure}[h]
-             \centering
-             \includegraphics[width=0.65\textwidth]{Images/App Config.jpg}
-             \caption{Main Configuration}
-             \label{fig: Main Configuration}
-             \end{figure} 
+###### Create3 card configuration 
+Go to the turtlebot4 online space with a browser and the following ip: robot ip':8080 and connect the create3 card to your wifi network using the 'connect' tab.
 
-             Restart the robot (to switch it off, remove it from the base and press and hold the stop button).
-             
-        \end{itemize}
-    \end{itemize}
-           
-\newpage
 
-    \item[] \hspace{1em} \textbf{4)} \textbf{NTP protocol configuration (clock synchronization)}
-    \begin{itemize}
-    \item For the proper operation of the network and the systems installed on it, it's important to synchronize everything to the same time and date. In fact, some community-programmed ROS2 nodes use time-stamped data for their operation their operation. \\
-    So we configure the routes and servers to be reached to update the time and date of every date of each device on the wifi network. \\
-   
-    \item We recommend setting the NTP relay to a fixed IPv4 address. In our case, we manually set these parameters on the ENDORSE PC connected to the network as follows: \\
-    IP:192.168.1.32 | Subnet mask: 255.255.255.0 | Default gateway:
-    192.168.1.1 \\
-        \begin{itemize}
-            \item NTP relay configuration under Linux Ubuntu 22.04\\
-                \begin{itemize}
-                    \item Time zone change 
-\begin{verbatim}
+Click 'connect' and the robot restarts. 
+
+In the 'Application' tab, then 'Configuration', you can modify the ROS2 parameters (ensure that these parameters are identical to those on the RaspberryPi board). 
+
+
+Restart the robot (to switch it off, remove it from the base and press and hold the stop button).
+
+#### NTP protocol configuration (clock synchronization)
+For the proper operation of the network and the systems installed on it, it's important to synchronize everything to the same time and date. In fact, some community-programmed ROS2 nodes use time-stamped data for their operation their operation. 
+So we configure the routes and servers to be reached to update the time and date of every date of each device on the wifi network. 
+
+We recommend setting the NTP relay to a fixed IPv4 address. In our case, we manually set these parameters on the ENDORSE PC connected to the network as follows: 
+IP:192.168.1.32 | Subnet mask: 255.255.255.0 | Default gateway:192.168.1.1 
+
+##### NTP relay configuration under Linux Ubuntu 22.04\\
+###### Time zone change 
 >sudo timedatectl set-timezone UTC
-\end{verbatim}
-    
-                    \item Installation of 'ntp' configuration software 
-\begin{verbatim}
+
+
+###### Installation of 'ntp' configuration software 
 >sudo apt update && sudo apt install ntp
-\end{verbatim}
 
-                    \item Configuring the ntp.conf file 
-\begin{verbatim}
+###### Configuring the ntp.conf file 
 >sudo nano /etc/ntp.conf
-\end{verbatim}
-                    We save the file and restart the service.
-\begin{verbatim}
+
+We save the file and restart the service.
 >sudo systemctl restart ntp
-\end{verbatim}
-                \end{itemize} 
 
-            \item Customer configuration \\
-                \begin{itemize}
-                    \item Time zone change 
-\begin{verbatim}
+###### Customer configuration 
+####### Time zone change 
 >sudo timedatectl set-timezone UTC
-\end{verbatim}
 
-                    \item Disabling the current ntp manager 
-\begin{verbatim}
+
+####### Disabling the current ntp manager 
 >sudo timedatectl set-ntp off
-\end{verbatim}
 
-                    \item Installation of 'ntp' and 'ntpdate' configuration and synchronization software 
-\begin{verbatim}
+####### Installation of 'ntp' and 'ntpdate' configuration and synchronization software 
 >sudo apt update && sudo apt install ntp && sudo apt install ntpdate
-\end{verbatim}
 
-                    \item Configuring the ntp.conf file 
-\begin{verbatim}
+####### Configuring the ntp.conf file 
 >sudo nano /etc/ntp.conf
-\end{verbatim}
-                \end{itemize}
-                                   
-        \end{itemize}
-     
-    \end{itemize}
 
-\newpage
+For the Create3 client, we go to the Web interface as \texttt{{[}IP\_of\_robot{]}:8080}. \\
+Here we use the following IP '192.168.1.7:8080'.
 
-            \begin{itemize} 
-                \item For the Create3 client, we go to the Web interface as \texttt{{[}IP\_of\_robot{]}:8080}. \\
-                Here we use the following IP '192.168.1.7:8080'.
-    
-                \begin{figure}[h]
-                \centering
-                \includegraphics[width=0.65\textwidth]{Images/Create3 Web page.jpg}
-                \caption{Create3 Web page}
-                \label{fig: Create3 Web page}
-                \end{figure}
-    
-                 \item We enter the 'Edit ntp.conf' menu and enter the following lines (commenting on the default servers).
-    
-                \begin{figure}[h]
-                \centering
-                \includegraphics[width=0.65\textwidth]{Images/NTP Config.jpg}
-                \caption{NTP Configuration}
-                \label{fig: NTP Configuration}
-                \end{figure}
-    
-                \begin{itemize}
-                    \item Restart the ntp service
-                        \begin{itemize}
-                            \item On linux: 
+We enter the 'Edit ntp.conf' menu and enter the following lines (commenting on the default servers).
+
+
+\begin{itemize}
+\item Restart the ntp service
+\begin{itemize}
+\item On linux: 
 \begin{verbatim}
 >sudo timedatectl set-timezone UTC
 \end{verbatim} 
-                            \item On Create3: 
-                            
-                            \begin{figure}[h]
-                            \centering
-                            \includegraphics[width=0.65\textwidth]{Images/Restart NTP Create3.jpg}
-                            \caption{Restart NTP Create3}
-                            \label{fig: Restart NTP Create3}
-                            \end{figure}
-                        \end{itemize}
+\item On Create3: 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.65\textwidth]{Images/Restart NTP Create3.jpg}
+\caption{Restart NTP Create3}
+\label{fig: Restart NTP Create3}
+\end{figure}
+\end{itemize}
 
 \newpage
 
-                    \item Possible error \\
-                    If the RaspberryPI does not synchronize automatically when the robot is restarted, run the following command to do so manually.
+\item Possible error \\
+If the RaspberryPI does not synchronize automatically when the robot is restarted, run the following command to do so manually.
 \begin{verbatim}
 >sudo timedatectl set-timezone UTC && sudo ntpdate [ip_du_relai]
 \end{verbatim}
-                    and enter this command in ~/.bashrc.
-                 
-                \end{itemize}
-            \end{itemize}
+and enter this command in ~/.bashrc.
+
+\end{itemize}
+\end{itemize}
 \end{itemize}
