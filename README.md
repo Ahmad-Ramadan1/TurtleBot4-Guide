@@ -38,6 +38,8 @@ The OAK-D-Pro offers all of the same features the OAK-D-Lite has, but uses highe
 
 In our project, we are currently focusing on the development and integration of the TurtleBot 4. Below, you can find a table highlighting the key differences between the TurtleBot 4 and the TurtleBot 4 Lite. This comparison will help provide insight into the unique features and specifications of each model, aiding in decision-making and understanding their respective capabilities within our project.
 
+<p align="center">
+
 |                                   | **TurtleBot 4 Lite**          | **TurtleBot 4**                |
 |-----------------------------------|-------------------------------|--------------------------------|
 | **Weight and Size**               |                               |                                |
@@ -65,6 +67,8 @@ In our project, we are currently focusing on the development and integration of 
 | **Software**                      |                               |                                |
 | ROS Version                       | 2.0.04                        | 2.0.04                         |
 | Operating System                  | Ubuntu                        | Ubuntu                         |
+
+</p>
 
 # Installing ROS2
 
