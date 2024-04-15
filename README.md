@@ -12,6 +12,10 @@ The TurtleBot 4 is a ROS 2-based mobile robot intended for education and researc
 It uses a Create® 3 as the base platform, and builds on it with the TurtleBot 4 shell and User Interface (UI) board. Inside the shell sits a Raspberry Pi 4B which runs the TurtleBot 4 software.   
 The TurtleBot 4 Lite is a barebones version of the TurtleBot 4. It has just the necessary components for navigation, mapping, and AI applications. The TurtleBot 4 has the same Raspberry Pi 4B, which sits in the cargo bay of the Create® 3, as well as the same RPLIDAR A1M8. The camera on the TurtleBot 4 Lite is the OAK-D-Lite. Additional sensors and payloads can be attached to the Create® 3 faceplate, or placed inside the cargo bay.  
 
+<p align="center">
+  <img src="https://github.com/Ahmad-Ramadan1/TurtleBot4-Guide/assets/167071993/0c65f76f-b723-4c6e-94a9-bfc31ca9d8e6" width="75%">
+</p>
+
 # Sensors
 
 ## 1) RPLIDAR A1M8
