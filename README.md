@@ -40,19 +40,21 @@ In our project, we are currently focusing on the development and integration of 
 We observe the installation with the "locale" command
 
 ## Source configuration
+```bash
 > sudo apt install software-properties-common
 > sudo add-apt-repository universe
 > sudo apt update && sudo apt install curl -y
 > sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
 > echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee/etc/apt/sources.list.d/ros2.list > /dev/null
-
+```
 
 ## Installing ROS2 packages
     
 ### Apt update
+```bash
 > sudo apt update
 > sudo apt upgrade
-
+```
 ### Installing ROS2 packages 
 To install ROS2, there are 2 choices:
 1) the full version including graphics libraries, example codes, etc.;
@@ -60,56 +62,64 @@ To install ROS2, there are 2 choices:
            
 The second installation is often used for systems where resources are “limited” like a RaspberryPI for example.
 Installing ROS2 packages:
+```bash
 > sudo apt install ros-humble-desktop
-            
+```            
 Installation of ROS2 Limited:
+```bash
 > sudo apt install ros-humble-ros-base
-            
+```            
 If you go to the official ROS2 Humble installation site, they present a "Development Tool" when installing ROS2. You have the option of installing it for your own reasons. In this document, we don't use it.
 
 ### ROS2 environment configuration
 To use ROS2, it is necessary to "source" its installation folder in order to use ROS2 commands in terminals. We modify the "bashrc" script as follows.
+```bash
 > gedit ~/.bashrc
-
+```
 A text editor window should open. At the end of this text file the following lines and save. The second line enables systems using ROS2 to communicate via WIFI on a network described by the ROS domain ID (default '0').
-
+```bash
 > source /opt/ros/humble/setup.bash
 > export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
 > export ROS_DOMAIN_ID=0
-
+```
 To update the .bashrc file in your terminal, run the following command.
+```bash
 > source ~/.bashrc
-> 
+```
 Note: You can also restart your terminal
 
 ### ROS2 installation test
 Test nodes are available to verify ROS2 installation. Run two different terminals and run the following commands.
     
 #### Terminal 1:
+```bash
 > ros2 run demo_nodes_cpp talker
-    
+```    
 #### Terminal 2:
+```bash
 > ros2 run demo_nodes_cpp listener
-
+```
 You need to get similar results (the terminals talk to each other).
 
 ### Installing the colcon compiler
 The colcon compiler can be used to build a ROS2 application.
 Here are the commands to write in a terminal.
-
+```bash
 > sudo apt update
 > sudo apt install python3-colcon-common-extensions
-
+```
 To make the compiler easier to use, we mouse over the compiler path in the .bashrc file as :
+```bash
 > gedit ~/.bashrc
-
-Then, in this file, below the ROS2 sourcing in the "ROS2 installation" section, we write the following line and save it. "ROS2 installation" section, we 
- write the following line and save.
+```
+Then, in this file, below the ROS2 sourcing in the "ROS2 installation" section, we write the following line and save it. "ROS2 installation" section, we write the following line and save.
+ ```bash
 > source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
-
+```
 To update the .bashrc file in your terminal, run the following command.
+```bash
 > source ~/.bashrc
-
+```
 Note: You can also restart your terminal
 
 
@@ -124,12 +134,13 @@ In the case of a network not connected to the Internet, you'll need another comp
 
 ##### ROS2 package installation for turtlebot4
 On the supervision computer, open a terminal and enter the following commands:
+```bash
 > sudo apt update && sudo apt install ros-humble-turtlebot4-desktop
 > sudo apt install ros-humble-turtlebot4-description 
 > ros-humble-turtlebot4-msgs 
 > ros-humble-turtlebot4-navigation 
 > ros-humble-turtlebot4-node
-
+```
 ##### Turtlebot4 configuration
 To configure turtlebot4 correctly, it's important to keep the system up to date with the latest patches. To do this, we first update the turtlebot's components, and then configure their parameters.
 
@@ -139,9 +150,10 @@ We now use a micro SD to SD adapter and insert the card into our into the SD dri
 We open the 'disques' or 'disks' utility and select the SD card. We format overwriting existing data with zeros and without partitioning. 
 We download the latest update from the following site, taking into account the version of ROS2 (here Humble): http://download.ros.org/downloads/turtlebot4/
 We extract the .img file from the downloaded .zip file and enter the following command in a terminal.
+```bash
 > wget https://raw.githubusercontent.com/turtlebot/turtlebot4_setup/humble/scripts/sd_flash.sh
 > bash sd_flash.sh /chemin/de/l’image.img
-
+```
 To find the name of the SD card, go to the 'disque' or 'disks' utility select the SD card and find the name next to 'Device' (in our case, we have /dev/mmcblk0'. 
 When the terminal asks for the SD card name, we enter 'mmcblk0' and continue. 
 We put the SD card back into turtlebot4 and reassemble the robot.
@@ -154,12 +166,14 @@ Go to a web browser and enter in the address bar the ip '10.42.0.1:8080'. In the
 ###### RaspberryPi configuration 
 Switch on turtlebot4 by positioning it on its charging base connected to the mains and wait for the robot to broadcast a sound. \\
 On the supervision computer, connect to the turtlebot4's wifi network (SSID: 'Turtlebot4' | Mdp: 'Turtlebot4'). Go to the remote access session of the turtlebot4 by typing the following command in a terminal:
+```bash
 > ssh ubuntu@10.42.0.1
-
+```
 The session password is 'turtlebot4'. 
 Once connected to turtlebot4, type the following command to configure the robot's parameters.
+```bash
 > turtlebot4-setup
-
+```
 A graphical interface opens.
 Go to WIFI-SETUP and connect the robot as a client to your wifi network (it's more optimal to connect the turtlebot4 to 5GHz).
 Save and apply changes (you'll be disconnected from the turtlebot's internal wifi). 
@@ -190,47 +204,57 @@ So we configure the routes and servers to be reached to update the time and date
 We recommend setting the NTP relay to a fixed IPv4 address. In our case, we manually set these parameters on the ENDORSE PC connected to the network as follows: 
 IP:192.168.1.32 | Subnet mask: 255.255.255.0 | Default gateway:192.168.1.1 
 
-##### NTP relay configuration under Linux Ubuntu 22.04\\
+##### NTP relay configuration under Linux Ubuntu 22.04
 ###### Time zone change 
+```bash
 >sudo timedatectl set-timezone UTC
-
+```
 
 ###### Installation of 'ntp' configuration software 
+```bash
 >sudo apt update && sudo apt install ntp
-
+```
 ###### Configuring the ntp.conf file 
+```bash
 >sudo nano /etc/ntp.conf
-
+```
 We save the file and restart the service.
+```bash
 >sudo systemctl restart ntp
-
+```
 ###### Customer configuration 
-- Time zone change 
+- Time zone change
+```bash
 >sudo timedatectl set-timezone UTC
-
-- Disabling the current ntp manager 
+```
+- Disabling the current ntp manager
+```bash
 >sudo timedatectl set-ntp off
-
-- Installation of 'ntp' and 'ntpdate' configuration and synchronization software 
+```
+- Installation of 'ntp' and 'ntpdate' configuration and synchronization software
+```bash
 >sudo apt update && sudo apt install ntp && sudo apt install ntpdate
-
-- Configuring the ntp.conf file 
+```
+- Configuring the ntp.conf file
+```bash
 >sudo nano /etc/ntp.conf
-
+```
 For the Create3 client, we go to the Web interface as \texttt{{[}IP\_of\_robot{]}:8080}. \\
 Here we use the following IP '192.168.1.7:8080'.
 
 We enter the 'Edit ntp.conf' menu and enter the following lines (commenting on the default servers).
 
 - Restart the ntp service
-  * On linux: 
+  * On linux:
+    ```bash
     >sudo timedatectl set-timezone UTC
-    
+    ```
   * On Create3: 
 
 - Possible error 
 If the RaspberryPI does not synchronize automatically when the robot is restarted, run the following command to do so manually.
+```bash
 >sudo timedatectl set-timezone UTC && sudo ntpdate [ip_du_relai]
-
+```
 and enter this command in ~/.bashrc.
 
