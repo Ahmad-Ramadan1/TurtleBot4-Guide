@@ -1,4 +1,4 @@
-# Implementation of TurtleBot with ROS2: Development and Integration
+# Implementation of TurtleBot4 with ROS2: Development and Integration
 
 # Background:
 
