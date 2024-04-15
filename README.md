@@ -15,19 +15,21 @@ The TurtleBot 4 Lite is a barebones version of the TurtleBot 4. It has just the 
 
 # Sensors
 
-1) RPLIDAR A1M8
+## RPLIDAR A1M8
 The RPLIDAR A1M8 is a 360 degree Laser Range Scanner with a 12m range. It is used to generate a 2D scan of the robot's surroundings.
         
-2) OAK-D-Pro
+## OAK-D-Pro
 The OAK-D-Lite camera from Luxonis uses a 4K IMX214 colour sensor along with a pair of OV7251 stereo sensors to produce high quality colour and depth images. 
 The on-board Myriad X VPU gives the camera the power to run computer vision applications, object tracking, and run AI models.
         
-3) OAK-D-Lite
+## OAK-D-Lite
 The OAK-D-Pro offers all of the same features the OAK-D-Lite has, but uses higher resolution OV9282 stereo sensors and adds an IR laser dot projector and an IR illumination LED. This allows the camera to create higher quality depth images, and perform better in low-light environments.
 
 In our project, we are currently focusing on the development and integration of the TurtleBot 4. Below, you can find a table highlighting the key differences between the TurtleBot 4 and the TurtleBot 4 Lite. This comparison will help provide insight into the unique features and specifications of each model, aiding in decision-making and understanding their respective capabilities within our project.
 
 # Installing ROS2
+
+## Implementation of the UTF-8 Format
 > sudo apt update && sudo apt install locales
 > sudo locale-gen en_US en_US.UTF-8
 > sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
@@ -35,7 +37,7 @@ In our project, we are currently focusing on the development and integration of 
     
 We observe the installation with the "locale" command
 
-# Source configuration
+## Source configuration
 > sudo apt install software-properties-common
 > sudo add-apt-repository universe
 > sudo apt update && sudo apt install curl -y
@@ -43,13 +45,13 @@ We observe the installation with the "locale" command
 > echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
          
          
-# Installing ROS2 packages
+## Installing ROS2 packages
     
-# Apt update
+### Apt update
 > sudo apt update
 > sudo apt upgrade
 
-# Installing ROS2 packages 
+### Installing ROS2 packages 
 To install ROS2, there are 2 choices:
 1) the full version including graphics libraries, example codes, etc.;
 2) the “lite” version with only what is needed to run ROS2
@@ -63,32 +65,33 @@ Installation of ROS2 Limited:
             
 If you go to the official ROS2 Humble installation site, they present a "Development Tool" when installing ROS2. You have the option of installing it for your own reasons. In this document, we don't use it.
 
-ROS2 environment configuration
+### ROS2 environment configuration
 To use ROS2, it is necessary to "source" its installation folder in order to use ROS2 commands in terminals. We modify the "bashrc" script as follows.
 > gedit ~/.bashrc
 
- A text editor window should open. At the end of this text file the following lines and save. The second line enables systems using ROS2 to communicate via WIFI on a network described by the ROS domain ID (default '0').
+A text editor window should open. At the end of this text file the following lines and save. The second line enables systems using ROS2 to communicate via WIFI on a network described by the ROS domain ID (default '0').
 
- > source /opt/ros/humble/setup.bash
- > export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
- > export ROS_DOMAIN_ID=0
+> source /opt/ros/humble/setup.bash
+> export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+> export ROS_DOMAIN_ID=0
 
- To update the .bashrc file in your terminal, run the following command.
- > source ~/.bashrc
- Note: You can also restart your terminal
+To update the .bashrc file in your terminal, run the following command.
+> source ~/.bashrc
+> 
+Note: You can also restart your terminal
 
-ROS2 installation test
+### ROS2 installation test
 Test nodes are available to verify ROS2 installation. Run two different terminals and run the following commands.
     
-Terminal 1:
+#### Terminal 1:
 > ros2 run demo_nodes_cpp talker
     
-Terminal 2:
+#### Terminal 2:
 > ros2 run demo_nodes_cpp listener
 
- You need to get similar results (the terminals talk to each other).
+You need to get similar results (the terminals talk to each other).
 
-Installing the colcon compiler
+### Installing the colcon compiler
 The colcon compiler can be used to build a ROS2 application.
 Here are the commands to write in a terminal.
 
@@ -108,7 +111,7 @@ To update the .bashrc file in your terminal, run the following command.
 Note: You can also restart your terminal
 
 
-Turtlebot4 installation and configuration:
+#### Turtlebot4 installation and configuration:
 
 \item[] \hspace{1em} \textbf{1)} \textbf{Preparing the WIFI network} 
 \begin{itemize}
