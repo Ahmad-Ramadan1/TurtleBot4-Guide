@@ -166,6 +166,8 @@ Switch on the turtlebot4 by positioning it on its charging base connected to the
 On the supervision computer, download the latest version of Create3 (here Humble H2.6). Then connect to the turtlebot4's wifi network (SSID: 'Turtlebot4' | Mdp: 'Turtlebot4'). \\
 Go to a web browser and enter in the address bar the ip '10.42.0.1:8080'. In the 'Update' tab, follow the update instructions.
 
+![Update Robot](https://github.com/Ahmad-Ramadan1/TurtleBot4-Guide/assets/167071993/8ad36fb8-f68d-482a-9acd-9e51272096cf)
+
 ### III) RaspberryPi configuration 
 Switch on turtlebot4 by positioning it on its charging base connected to the mains and wait for the robot to broadcast a sound. \\
 On the supervision computer, connect to the turtlebot4's wifi network (SSID: 'Turtlebot4' | Mdp: 'Turtlebot4'). Go to the remote access session of the turtlebot4 by typing the following command in a terminal:
@@ -192,11 +194,13 @@ Save and apply the changes.
 ### IV) Create3 card configuration 
 Go to the turtlebot4 online space with a browser and the following ip: robot ip':8080 and connect the create3 card to your wifi network using the 'connect' tab.
 
+![Connect Robot to WIFI](https://github.com/Ahmad-Ramadan1/TurtleBot4-Guide/assets/167071993/4c5bc3e5-beb4-44e8-bbfc-d2ac5ed01225)
 
 Click 'connect' and the robot restarts. 
 
 In the 'Application' tab, then 'Configuration', you can modify the ROS2 parameters (ensure that these parameters are identical to those on the RaspberryPi board). 
 
+![App Config](https://github.com/Ahmad-Ramadan1/TurtleBot4-Guide/assets/167071993/8af39f6b-46d1-4d0f-809c-9bfa131b4ff7)
 
 Restart the robot (to switch it off, remove it from the base and press and hold the stop button).
 
@@ -244,7 +248,11 @@ sudo nano /etc/ntp.conf
 For the Create3 client, we go to the Web interface as \texttt{{[}IP\_of\_robot{]}:8080}. \\
 Here we use the following IP '192.168.1.7:8080'.
 
+![Create3 Web page](https://github.com/Ahmad-Ramadan1/TurtleBot4-Guide/assets/167071993/ab2503f0-78ac-455c-8a96-eebc0639c086)
+
 We enter the 'Edit ntp.conf' menu and enter the following lines (commenting on the default servers).
+
+![NTP Config](https://github.com/Ahmad-Ramadan1/TurtleBot4-Guide/assets/167071993/86ab17cb-89f9-4f09-8ef6-92e9810dd886)
 
 ### III) Restart the ntp service
 #### a) On linux:
@@ -252,6 +260,8 @@ We enter the 'Edit ntp.conf' menu and enter the following lines (commenting on t
 sudo timedatectl set-timezone UTC
 ```
 #### b) On Create3: 
+
+![Restart NTP Create3](https://github.com/Ahmad-Ramadan1/TurtleBot4-Guide/assets/167071993/64ee08a8-e9e1-45cc-a2fb-421624c6ec43)
 
 ### IV) Possible error 
 If the RaspberryPI does not synchronize automatically when the robot is restarted, run the following command to do so manually.
