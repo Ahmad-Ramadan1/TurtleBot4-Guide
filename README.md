@@ -276,6 +276,58 @@ source ~/.bashrc
 ```
 Note: You can also restart your terminal
 
+# Workspace Creation
+ROS2 requires a specific file organization to function and compile properly. To begin, the ROS2 compiler, colcon, is installed. Then, a workspace is created.
+
+## 1) Installation of Colcon Compiler
+Colcon is used to build ROS2 applications. This installation is not required every time a new workspace is created.
+The following commands are executed in the terminal:
+```bash
+sudo apt update
+sudo apt install python3-colcon-common-extensions
+```
+Edit the .bashrc file to include the path to colcon for easy use.
+```bash
+gedit ~/.bashrc
+```
+Then, in this file, below the ROS2 sourcing performed in the "ROS2 installation" section, we write the following line and save it.
+```bash
+source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
+```
+Refresh the .bashrc file in the terminal.
+```bash
+source ~/.bashrc
+```
+
+## 2) Workspace Creation
+The process of creating a workspace involves executing various Linux commands:
+Navigate to a directory using 
+```bash
+cd /path.
+```
+Create a directory with 
+```bash
+mkdir directory_name.
+```
+Create subdirectories within the workspace, such as src.
+To build the workspace, Run
+```bash
+colcon build 
+```
+Source the setup.bash file in the .bashrc file to ensure ROS2 can find the built packages.
+
+If certain commands require administrator rights, you can precede the command with the word "sudo" and enter your session password.
+
+# Package Creation
+Packages in ROS2 organize nodes and codes for the project. They allow for the organization of different elements of a robot. The process involves creating a package with a base of Python code and dependency on rclpy.
+
+To create a package, go to the /src workspace directory and write the following command to create a package with a python code base and "rclpy" dependency.
+```bash
+ros2 pkg create my_turtlesim_controller --build-type ament_python --dependencies rclpy
+```
+
+# Node Programming (p.13 -> 18)
+
 
 # Turtlebot4 installation and configuration:
 
