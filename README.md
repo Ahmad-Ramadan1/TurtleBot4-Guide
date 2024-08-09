@@ -326,8 +326,44 @@ To create a package, go to the /src workspace directory and write the following 
 ros2 pkg create my_turtlesim_controller --build-type ament_python --dependencies rclpy
 ```
 
-# Node Programming (p.13 -> 18)
+# Node Programming
+Node programming is a fundamental aspect of ROS2 (Robot Operating System 2) development. It allows developers to define and implement specific functionalities within robotics applications. By effectively managing nodes, you can create modular and scalable robotic systems. Below is an overview of the key steps involved in node programming, including setting up the code, creating nodes, and the processes of compilation and execution.
 
+## 1) Setting Up the Code
+To begin with ROS2 development, configuring an integrated development environment (IDE) like Spyder can greatly enhance your coding experience. Here’s how you can set up your development environment:
+
+### I) IDE Configuration
+Spyder, known for its powerful features and user-friendly interface, can be configured to work with ROS2. This involves installing relevant extensions and setting up the IDE to support ROS2's specific requirements.
+
+### II) Extensions and Tools
+Install necessary Python packages and extensions that facilitate ROS2 development, such as ROS2 Python libraries and tools that integrate with Spyder.
+
+### III) Environment Setup
+Ensure that your ROS2 workspace is properly configured in the IDE, including environment variables and paths. This setup will streamline the development process and reduce potential issues.
+
+## 2) Node Creation
+Nodes are the building blocks of ROS2 applications. They are responsible for executing specific tasks or algorithms and form the core functional units of a robotic system. The process of node creation involves:
+
+### I) Defining Node Behavior
+Each node is designed to perform a specific function, such as sensor data processing, control algorithms, or communication tasks. You define these behaviors by writing node scripts in Python or C++.
+
+### II) Node Implementation
+Implement your nodes by defining their functionalities and how they interact with other nodes. This step involves coding the logic that will be executed when the node runs.
+
+### III) Modular Design
+Nodes promote modularity in your application, allowing you to break down complex systems into smaller, manageable components. This modular approach simplifies development and testing.
+
+## 3) Compilation and Execution
+Once nodes are created, they need to be compiled and executed to ensure they work as intended within the ROS2 ecosystem:
+
+### I) Compilation
+Compile your node code to create executable files that can be run in the ROS2 environment. This step ensures that all code changes are properly integrated and ready for execution.
+
+### II) Execution
+Run the compiled nodes to validate their functionality and integration within the broader project. Executing nodes allows you to test their behavior, interact with other nodes, and ensure they meet the requirements of your application.
+
+### III) Validation
+During execution, monitor node performance and debug any issues that arise. This process helps to verify that nodes are operating correctly and that they interact seamlessly with other components of the system.
 
 # Turtlebot4 installation and configuration:
 
