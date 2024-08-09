@@ -1,38 +1,21 @@
-open new terminal run these:
-ros2 launch turtlebot4_navigation slam.launch.py
-ros2 launch turtlebot4_navigation localization.launch.py map:=office_map.yaml
-ros2 launch turtlebot4_navigation nav2.launch.py
-ros2 launch turtlebot4_viz view_robot.launch.py
-after run python code:
-cd turtlebot4_ws
-ros2 run turtlebot4_python_tutorials turtlebot4_first_python_node
-
-source install/local_setup.bash
-colcon build --symlink-install
-ros2 topic echo /clicked_point
-
-manual tf transform:
-ros2 run tf2_ros static_transform_publisher 0 0 0 1.571 0 0 base_link wheel_drop_left
-(according to ros2 run rqt_tf_tree rqt_tf_tree we can see that all are part of odom but i added them to map instead of odom only the part of wheels)
-
-to know the position of this point after publish:
-ros2 topic echo /clicked_point
-
-ros2 run rqt_console rqt_console
-
-ros2 topic echo /odom
-
-https://get-help.theconstruct.ai/t/solved-ros2-subscriber-callback-not-working/19297/4
-
-https://github.com/roboticvedant/ROS2_turtlesim_PID_demo/blob/main/src/turtle_demo_controller/turtle_demo_controller/turtle_controller_with_pid_implimentation.py   (PID TURTLESIM PYTHON CODE)
+Open new terminal run these:
 
 ros2 param set /amcl update_min_d -1.0
 ros2 param set /amcl update_min_a -1.0
+(Necessary for turtlebot codes functioning)
 
-ros2 param get /amcl update_min_d
-ros2 param get /amcl update_min_a
+ros2 launch turtlebot4_navigation localization.launch.py map:=office_map.yaml
+ros2 launch turtlebot4_navigation nav2.launch.py
+ros2 launch turtlebot4_viz view_robot.launch.py
 
-ros2 topic info /amcl_pose
-ros2 topic echo /cmd_vel
+After run the python code:
+cd turtlebot4_ws
+colcon build --symlink-install
+source install/local_setup.bash
+ros2 run turtlebot4_python_tutorials turtlebot4_first_python_node
 
-ros2 run rqt_reconfigure rqt_reconfigure
+In case of errors in tf transform run:
+ros2 run tf2_ros static_transform_publisher 0 0 0 1.571 0 0 base_link wheel_drop_left
+(We can check for nodes and topics using: ros2 run rqt_tf_tree rqt_tf_tree)
+
+
