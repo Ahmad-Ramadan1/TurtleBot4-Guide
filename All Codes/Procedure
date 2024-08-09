@@ -1,0 +1,19 @@
+Open new terminal run these:
+
+ros2 param set /amcl update_min_d -1.0
+ros2 param set /amcl update_min_a -1.0
+(Necessary for turtlebot codes functioning)
+
+ros2 launch turtlebot4_navigation localization.launch.py map:=office_map.yaml
+ros2 launch turtlebot4_navigation nav2.launch.py
+ros2 launch turtlebot4_viz view_robot.launch.py
+
+After run the python code:
+cd turtlebot4_ws
+colcon build --symlink-install
+source install/local_setup.bash
+ros2 run turtlebot4_python_tutorials turtlebot4_first_python_node
+
+In case of errors in tf transform run:
+ros2 run tf2_ros static_transform_publisher 0 0 0 1.571 0 0 base_link wheel_drop_left
+(We can check for nodes and topics using: ros2 run rqt_tf_tree rqt_tf_tree)
