@@ -1,0 +1,274 @@
+clear all
+folderPaths = genpath('CKKSClass\');
+addpath(folderPaths);
+
+digits(100)         
+s = vpa(10)^4;      % scaling factor
+q = vpa(10)^15;     % base modulus
+L = 3;              % number of levels
+N = 8;              % key dimension
+setup = Setup(N, q, s, L);
+[pk, sk, setup] = KeyGen(setup);
+
+% Define initial conditions
+initial_conditions = [0.5; 3.5; 0.5235; 1; 0; 0; 2.5; 0];  % [x0; y0; theta0; v0; x_hat0; x_dot_hat0; y_dot0; y_dot_hat0]
+
+z_ref = @(t)[sin(t); cos(t); -cos(t); sin(t)];
+u_ref = @(t)[-sin(t); cos(t)];
+
+% Define the system matrices
+A = [0, 1, 0, 0;
+     0, 0, 0, 0;
+     0, 0, 0, 1;
+     0, 0, 0, 0];
+
+B = [0, 0;
+     1, 0;
+     0, 0;
+     0, 1];
+
+C = [1, 0, 0, 0;
+     0, 0, 1, 0];
+
+At = A';
+Ct = C';
+
+% Define the desired poles
+p = [-1, -3, -1, -3];
+q = [-4, -6, -4, -6];
+
+
+% Compute the controller gains using pole placement
+K = place(A, B, p);
+K1 = K(1, :);
+K2 = K(2, :);
+
+% Encrypt the controller gains
+K1_ecd = Ecd(setup, K1, 'type', 'scalar');
+K1_cyph = Enc(setup, K1_ecd, pk);
+
+K2_ecd = Ecd(setup, K2, 'type', 'scalar');
+K2_cyph = Enc(setup, K2_ecd, pk);
+
+Lp = place(At, Ct, q);
+Lpt = Lp';
+
+tspan = [0,15];
+% Solve the system of differential equations
+[t,Q] = ode45(@(t, Q) dynamic(t, Q, z_ref, u_ref, A, B, C, Lpt, K1, K2), tspan, initial_conditions);
+[t,z] = ode45(@(t, z) dynamic_e(t, z, setup, pk, sk, z_ref, u_ref, A, B, C, Lpt, K1_cyph, K2_cyph), tspan, initial_conditions);
+
+% Extract results
+x = Q(:, 1);
+y = Q(:, 2);
+theta = Q(:, 3);
+x_hat = Q(:, 5);
+x_dot_hat = Q(:, 6);
+y_hat = Q(:, 7);
+y_dot_hat = Q(:, 8);
+theta_hat= atan2(y_dot_hat, x_dot_hat);
+
+x_e = z(:, 1);
+y_e = z(:, 2);
+theta_e = z(:, 3);
+x_hat_e = z(:, 5);
+x_dot_hat_e = z(:, 6);
+y_hat_e = z(:, 7);
+y_dot_hat_e = z(:, 8);
+theta_hat_e= atan2(y_dot_hat_e, x_dot_hat_e);
+
+z_ref_result = z_ref(t');
+x_ref = z_ref_result(1,:);
+y_ref = z_ref_result(3,:);
+
+figure;
+plot(t, x, 'b', 'LineWidth', 1.5);      
+hold on;                                  
+plot(t, x_hat, 'r--', 'LineWidth', 1.5);  
+plot(t, x_ref, 'g-.', 'LineWidth', 1.5); 
+hold off;                                 
+xlabel('Time');
+ylabel('Amplitude');
+title('Comparison of x, x_hat, and x_ref');
+legend('x', 'x_hat', 'x_ref');
+grid on;
+
+figure;
+plot(t, y, 'b', 'LineWidth', 1.5);      
+hold on;                                  
+plot(t, y_hat, 'r--', 'LineWidth', 1.5);  
+plot(t, y_ref, 'g-.', 'LineWidth', 1.5); 
+hold off;                                 
+xlabel('Time');
+ylabel('Amplitude');
+title('Comparison of y, y_hat, and y_ref');
+legend('y', 'y_hat', 'y_ref');
+grid on;
+
+figure;
+plot(t, theta, 'b', 'LineWidth', 1.5);      
+hold on;                                  
+plot(t, theta_hat, 'r--', 'LineWidth', 1.5);  
+plot(t, t, 'g-.', 'LineWidth', 1.5); 
+hold off;                                 
+xlabel('Time');
+ylabel('Amplitude');
+title('Comparison of theta, time');
+legend('theta', 'theta_hat', 't');
+grid on;
+
+% Plot y vs x
+figure;
+plot(x, y);
+hold on;
+plot(x_ref, y_ref);
+plot(x_hat, y_hat);
+hold off;
+xlabel('x');
+ylabel('y');
+title('y vs x');
+grid on;
+
+function dQdt = dynamic(t, Q, z_ref, u_ref, A, B, C, Lpt, K1, K2)
+    x = Q(1);
+    y = Q(2);
+    theta = Q(3);
+    v = Q(4);
+    x_hat = Q(5);
+    x_dot_hat = Q(6);
+    y_hat = Q(7);
+    y_dot_hat = Q(8);
+    theta_hat = atan2(y_dot_hat, x_dot_hat);
+
+    ur = u_ref(t);
+    z_bru_r = z_ref(t);
+
+    ur1 = ur(1);
+    ur2 = ur(2);
+
+    z_bru1 = [x; v * cos(theta); y; v * sin(theta)];
+    cosT1 = cos(theta_hat);
+    sinT1 = sin(theta_hat);
+
+    z_hat = [x_hat; x_dot_hat; y_hat; y_dot_hat];
+    
+    [ctrl1, u] = ctrlFlatnessClear(t, z_hat, z_bru_r, ur1, ur2, cosT1, sinT1, v, K1, K2);
+    vdot1 = ctrl1(1);
+    omega1 = ctrl1(2);
+    u_0 = u;
+    
+    dthetadt = omega1;
+    
+    temp_1 = A * z_hat;
+    temp_2 = B * u_0;
+    temp_3 = Lpt * C * (z_bru1 - z_hat);
+    temp = temp_1 + temp_2 + temp_3;
+    
+    % Update the state vector
+    dQdt = [v * cos(theta), v * sin(theta), dthetadt, vdot1, temp(1), temp(2), temp(3), temp(4)]';
+
+end
+
+function dzdt = dynamic_e(t, z, setup, pk, sk, z_ref, u_ref, A, B, C, Lpt, K1_cyph, K2_cyph)
+    x_e = z(1);
+    y_e = z(2);
+    theta_e = z(3);
+    v_e = z(4);
+    x_hat_e = z(5);
+    x_dot_hat_e = z(6);
+    y_hat_e = z(7);
+    y_dot_hat_e = z(8);
+    theta_hat_e = atan2(y_dot_hat_e, x_dot_hat_e);
+
+    ur = u_ref(t);
+    z_bru_r = z_ref(t);
+
+    ur1 = ur(1);
+    ur2 = ur(2);
+
+    z_e = [x_e; v_e * cos(theta_e); y_e; v_e * sin(theta_e)];
+    z_hat_e = [x_hat_e; x_dot_hat_e; y_hat_e; y_dot_hat_e];
+
+    z_hat_e_cyph = Ecd(setup, z_hat_e, 'type', 'scalar');
+    ct_z_hat_e = Enc(setup, z_hat_e_cyph, pk);
+
+    % Encrypted data
+    z_hat_cyph = Ecd(setup, z_e, 'type', 'scalar');
+    ct_z_bru = Enc(setup, z_hat_cyph, pk);
+
+    z_bru_r_cyph = Ecd(setup, z_bru_r, 'type', 'scalar');
+    ct_z_bru_r = Enc(setup, z_bru_r_cyph, pk);
+
+    z_u1 = Ecd(setup, ur1, 'type', 'scalar');
+    ct_u1 = Enc(setup, z_u1, pk);
+
+    z_u2 = Ecd(setup, ur2, 'type', 'scalar');
+    ct_u2 = Enc(setup, z_u2, pk);
+
+    cos_e = Ecd(setup, cos(theta_hat_e), 'type', 'scalar');
+    ct_cos = Enc(setup, cos_e, pk);
+
+    sin_e = Ecd(setup, sin(theta_hat_e), 'type', 'scalar');
+    ct_sin = Enc(setup, sin_e, pk);
+
+    z_v = Ecd(setup, 1 / v_e, 'type', 'scalar');
+    ct_v = Enc(setup, z_v, pk);
+
+    % Compute control with encrypted data
+    [ctrl2_cyph, ul] = ctrlFlatnessEnc(t, ct_z_hat_e, ct_z_bru_r, ct_u1, ct_u2, ct_cos, ct_sin, K1_cyph, K2_cyph, ct_v);
+
+    % Decrypt control
+    vdot2 = Dec(ctrl2_cyph{1}, sk);
+    vdot2_dec = Dcd(vdot2);
+
+    omega2 = Dec(ctrl2_cyph{2}, sk);
+    omega2_dec = Dcd(omega2);
+
+    ul_1 = ul{1};
+    ul_2 = ul{2};
+
+    ul_1_dec = Dec(ul_1, sk);
+    ul_dcd_1 = Dcd(ul_1_dec);
+
+    ul_2_dec = Dec(ul_2, sk);
+    ul_dcd_2 = Dcd(ul_2_dec);
+
+    ul_t_dcd = [ul_dcd_1; ul_dcd_2];
+
+    temp_1 = A * z_hat_e;
+    temp_2 = B * ul_t_dcd;
+    temp_3 = Lpt * C * (z_e - z_hat_e);
+    temp = temp_1 + temp_2 + temp_3;
+
+    dzdt = double([v_e * cos(theta_e); v_e * sin(theta_e); double(omega2_dec(8)); double(vdot2_dec(8)); temp(1); temp(2); temp(3); temp(4)]);
+
+end
+function [ctrl, u] = ctrlFlatnessClear(t, z, zr, ur1, ur2, cosT, sinT, v, K1, K2)
+    deltaT = z - zr;
+
+    % -K @ deltaT + ur
+    u_bf_1 = -K1 * deltaT + ur1;
+    u_bf_2 = -K2 * deltaT + ur2;
+    u = [u_bf_1; u_bf_2];
+
+    % (vdot, omega) = M^{-1} (u1,u2)
+    vdot = cosT * u_bf_1 + sinT * u_bf_2;
+    omega = (-sinT * u_bf_1 + cosT * u_bf_2) / v;
+
+    ctrl = [vdot; omega];
+end
+
+function [ctrl, u] = ctrlFlatnessEnc(t, z_e, zr_e, ur1_e, ur2_e, cosT_e, sinT_e, K1_cyph, K2_cyph, inv_v_e)
+    deltaT_cyph = z_e - zr_e;
+
+    % -K @ deltaT + ur
+    mK_deltaT_m_ur1_cyph_1 = -(K1_cyph * deltaT_cyph) + ur1_e;
+    mK_deltaT_m_ur2_cyph_2 = -(K2_cyph * deltaT_cyph) + ur2_e;
+    u = {mK_deltaT_m_ur1_cyph_1; mK_deltaT_m_ur2_cyph_2};
+
+    % (vdot, omega) = M^{-1} (u1,u2)
+    vdot_e = cosT_e * mK_deltaT_m_ur1_cyph_1 + sinT_e * mK_deltaT_m_ur2_cyph_2;
+    omega_e = (-sinT_e * mK_deltaT_m_ur1_cyph_1 + cosT_e * mK_deltaT_m_ur2_cyph_2) * inv_v_e;
+
+    ctrl = {vdot_e; omega_e};
+end 

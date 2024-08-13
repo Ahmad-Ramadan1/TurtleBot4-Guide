@@ -1,0 +1,204 @@
+clear all
+folderPaths = genpath('CKKSClass\');
+addpath(folderPaths);
+
+digits(100)         
+s = vpa(10)^4;      % scaling factor
+q = vpa(10)^15;     % base modulus
+L = 3;              % number of levels
+N = 8;              % key dimension
+setup = Setup(N, q, s, L);
+[pk, sk, setup] = KeyGen(setup);
+
+x0 = 0.5;
+y0 = 3.5;
+theta0 = pi / 6;
+z0 = [x0; y0; theta0; 1; x0; y0; theta0; 1];
+
+% Define time span for integration
+T = 15;
+t = linspace(0, T, 1000);
+
+% Define the system matrices
+A = [0, 1, 0, 0;
+     0, 0, 0, 0;
+     0, 0, 0, 1;
+     0, 0, 0, 0];
+
+B = [0, 0;
+     1, 0;
+     0, 0;
+     0, 1];
+
+% Define the desired poles
+p = [-1, -2, -3, -7];
+
+% Compute the controller gains using pole placement
+K = place(A, B, p);
+K1 = K(1, :);
+K2 = K(2, :);
+
+% Encrypt the controller gains
+K1_ecd = Ecd(setup, K1, 'type', 'scalar');
+K1_cyph = Enc(setup, K1_ecd, pk);
+
+K2_ecd = Ecd(setup, K2, 'type', 'scalar');
+K2_cyph = Enc(setup, K2_ecd, pk);
+
+% Solve the system of differential equations
+[t, z] = ode45(@(t, z) dynamics_CLEAR_AND_ENC(t, z, setup, pk, sk, K1, K2, K1_cyph, K2_cyph), t, z0);
+
+% Extract results
+x = z(:, 1);
+y = z(:, 2);
+theta = z(:, 3);
+
+% Plot results
+figure;
+subplot(2, 2, 1);
+plot(t, x);
+xlabel('Time');
+ylabel('x');
+title('x vs Time');
+grid on;
+
+subplot(2, 2, 2);
+plot(t, y);
+xlabel('Time');
+ylabel('y');
+title('y vs Time');
+grid on;
+
+subplot(2, 2, 3);
+plot(t, theta);
+xlabel('Time');
+ylabel('theta');
+title('theta vs Time');
+grid on;
+
+subplot(2, 2, 4);
+plot(x, y);
+xlabel('x');
+ylabel('y');
+title('y vs x');
+grid on;
+
+function Tr = Tr(t)
+    Tr = [sin(t); cos(t); -cos(t); sin(t)];
+end
+
+function dTr = dTr(t)
+    dTr = [cos(t); -sin(t); -sin(t); -cos(t)];
+end
+
+function ddTr = ddTr(t)
+    ddTr = [-sin(t); -cos(t); cos(t); -sin(t)];
+end
+
+function dzdt = dynamics_CLEAR_AND_ENC(t, z, setup, pk, sk, K1, K2, K1_cyph, K2_cyph)
+    % Define function handles for reference trajectory and its derivatives
+    z_ref = @(t)[sin(t); cos(t); -cos(t); sin(t)];
+    z_bru_r = z_ref(t);
+
+    u_ref = @(t)[-sin(t); cos(t)];
+    ur = u_ref(t);
+
+    ur1 = ur(1);
+    ur2 = ur(2);
+
+    % Split data 
+    z1 = z(1:4); % x, y, theta, v
+    z2 = z(5:8); % x, y, theta, v of the encrypted trajectory
+
+    % Compute the trajectory in clear
+    x1 = z1(1);
+    y1 = z1(2);
+    theta1 = z1(3);
+    v1 = z1(4);
+    z_bru1 = [x1; v1 * cos(theta1); y1; v1 * sin(theta1)];
+    cosT1 = cos(theta1);
+    sinT1 = sin(theta1);
+
+    % Compute the value of the controls
+    ctrl1 = ctrlFlatnessClear(t, z_bru1, z_bru_r, ur1, ur2, cosT1, sinT1, v1, K1, K2);
+    vdot1 = ctrl1(1);
+    omega1 = ctrl1(2);
+
+    % Compute dynamics
+    ftz1 = [v1 * cos(theta1); v1 * sin(theta1); omega1; vdot1];
+
+    % Compute the trajectory encrypted
+    x2 = z2(1);
+    y2 = z2(2);
+    theta2 = z2(3);
+    v2 = z2(4);
+    z_bru2 = [x2; v2 * cos(theta2); y2; v2 * sin(theta2)];
+
+    % Encrypted data
+    z_bru_cyph = Ecd(setup, z_bru2, 'type', 'scalar');
+    ct_z_bru = Enc(setup, z_bru_cyph, pk);
+
+    z_bru_r_cyph = Ecd(setup, z_bru_r, 'type', 'scalar');
+    ct_z_bru_r = Enc(setup, z_bru_r_cyph, pk);
+
+    z_u1 = Ecd(setup, ur1, 'type', 'scalar');
+    ct_u1 = Enc(setup, z_u1, pk);
+
+    z_u2 = Ecd(setup, ur2, 'type', 'scalar');
+    ct_u2 = Enc(setup, z_u2, pk);
+
+    cos_e = Ecd(setup, cos(theta2), 'type', 'scalar');
+    ct_cos = Enc(setup, cos_e, pk);
+
+    sin_e = Ecd(setup, sin(theta2), 'type', 'scalar');
+    ct_sin = Enc(setup, sin_e, pk);
+
+    z_v = Ecd(setup, 1 / v2, 'type', 'scalar');
+    ct_v = Enc(setup, z_v, pk);
+
+    % Compute control with encrypted data
+    ctrl2_cyph = ctrlFlatnessEnc(t, ct_z_bru, ct_z_bru_r, ct_u1, ct_u2, ct_cos, ct_sin, K1_cyph, K2_cyph, ct_v);
+    % ctrl2_cyph = ctrlFlatnessEnc(t, ct_z_bru, ct_z_bru_r, ct_u1, ct_u2, ct_cos, ct_sin, K1_cyph, K2_cyph);
+
+    % Decrypt control
+    vdot2 = Dec(ctrl2_cyph{1}, sk);
+    vdot2_dec = Dcd(vdot2);
+
+    omega2 = Dec(ctrl2_cyph{2}, sk);
+    omega2_dec = Dcd(omega2);
+
+    % omega = omega / v
+    ftz2 = [v2 * cos(theta2); v2 * sin(theta2); double(omega2_dec(8)); double(vdot2_dec(8))];
+
+    dzdt = [ftz1; ftz2];
+end
+
+function ctrl = ctrlFlatnessEnc(t, z_e, zr_e, ur1_e, ur2_e, cosT_e, sinT_e, K1_cyph, K2_cyph, inv_v_e)
+    deltaT_cyph = z_e - zr_e;
+
+    % -K @ deltaT + ur
+    mK_deltaT_m_ur1_cyph_1 = -(K1_cyph * deltaT_cyph) + ur1_e;
+    mK_deltaT_m_ur2_cyph_2 = -(K2_cyph * deltaT_cyph) + ur2_e;
+
+    % (vdot, omega) = M^{-1} (u1,u2)
+    vdot_e = cosT_e * mK_deltaT_m_ur1_cyph_1 + sinT_e * mK_deltaT_m_ur2_cyph_2;
+    omega_e = (-sinT_e * mK_deltaT_m_ur1_cyph_1 + cosT_e * mK_deltaT_m_ur2_cyph_2) * inv_v_e;
+    % omega_e = -sinT_e * mK_deltaT_m_ur1_cyph_1 + cosT_e * mK_deltaT_m_ur2_cyph_2;
+
+    % ctrl = [vdot_e; omega_e];
+    ctrl = {vdot_e; omega_e};
+end
+
+function ctrl = ctrlFlatnessClear(t, z, zr, ur1, ur2, cosT, sinT, v, K1, K2)
+    deltaT = z - zr;
+
+    % -K @ deltaT + ur
+    u_bf_1 = -K1 * deltaT + ur1;
+    u_bf_2 = -K2 * deltaT + ur2;
+
+    % (vdot, omega) = M^{-1} (u1,u2)
+    vdot = cosT * u_bf_1 + sinT * u_bf_2;
+    omega = (-sinT * u_bf_1 + cosT * u_bf_2) / v;
+
+    ctrl = [vdot; omega];
+end
