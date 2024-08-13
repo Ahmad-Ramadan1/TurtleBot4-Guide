@@ -1,0 +1,128 @@
+import sympy as sp
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import odeint
+from scipy.signal import place_poles
+
+# Declare symbols
+v, theta, w = sp.symbols('v theta w')
+# Define initial conditions
+initial_conditions = [2, 5, 9, 1]  # [x0, y0, theta0, v]
+
+# Define inputs
+def z_ref(t):
+    z_r = np.array([np.sin(t), np.cos(t), -np.cos(t), np.sin(t)])
+
+    return z_r
+
+def u_ref(t):
+    u_r = np.array([-np.sin(t), np.cos(t)])
+    
+    return u_r
+
+# Define time span for integration
+t = np.linspace(0, 15, 1000)  # Integration from t=0 to t=50 with 100 points
+
+# Define the system matrices
+A = np.array([[0, 1, 0, 0],
+              [0, 0, 0, 0],
+              [0, 0, 0, 1],
+              [0, 0, 0, 0]])
+
+B = np.array([[0, 0],
+              [1, 0],
+              [0, 0],
+              [0, 1]])
+
+# Define the desired poles
+p = [-1, -2, -3, -7]
+
+# Compute the controller gains using pole placement
+K= place_poles(A, B, p).gain_matrix
+
+# Define the function representing the system of ODEs
+def dynamic(t, Q):
+    x, y, theta, v = Q
+    dxdt = v * np.cos(theta)
+    dydt = v * np.sin(theta)
+    z = np.array([x, dxdt, y, dydt])
+    
+    z_r = z_ref(t)
+    u_r = u_ref(t)
+    control = flatness(z, z_r, u_r, v, theta)
+    dv = control[0,0]
+    w = control[0,1]
+    dthetadt = w
+    
+    # Update the state vector
+    dQdt = [dxdt, dydt, dthetadt, dv]
+    
+    return dQdt
+
+def flatness(z, z_r, u_r, v, theta):
+    
+    delta_z = z - z_r
+
+    # Calculate delta_u
+    delta_u = np.dot(K, delta_z)
+    # Define u
+    u = u_r - delta_u
+
+    # Define matrix M_inverse
+    M_inverse = np.matrix([[v*np.cos(theta), v*np.sin(theta)],
+                            [-np.sin(theta), np.cos(theta)]]) / v
+
+    # Perform matrix multiplication
+    result = np.dot(M_inverse, u)
+    return result
+
+# Solve the system of differential equations
+sol = odeint(dynamic, initial_conditions, t, tfirst=True)
+
+# Extract results
+x = sol[:, 0]
+y = sol[:, 1]
+theta = sol[:, 2]
+
+# Plot x vs time
+plt.figure(figsize=(10, 6))
+plt.plot(t, x, label='x')
+plt.xlabel('Time')
+plt.ylabel('x')
+plt.title('x vs Time')
+plt.grid(True)
+plt.legend()
+plt.show()
+
+# Plot y vs time
+plt.figure(figsize=(10, 6))
+plt.plot(t, y, label='y')
+plt.xlabel('Time')
+plt.ylabel('y')
+plt.title('y vs Time')
+plt.grid(True)
+plt.legend()
+plt.show()
+
+# Plot theta vs time
+plt.figure(figsize=(10, 6))
+plt.plot(t, theta, label='theta')
+plt.xlabel('Time')
+plt.ylabel('theta')
+plt.title('theta vs Time')
+plt.grid(True)
+plt.legend()
+plt.show()
+
+
+# Plot y vs x
+plt.figure(figsize=(10, 6))
+plt.plot(x, y, label='y vs x')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.title('y vs x')
+plt.grid(True)
+plt.legend()
+plt.show()
+
+
